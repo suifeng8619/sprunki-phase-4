@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Allow: /llms.txt$
+Allow: /llms-full.txt$
+
+Sitemap: https://sprunkiphase4.net/sitemap.xml

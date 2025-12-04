@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>验证优化效果</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-item { margin: 20px 0; padding: 10px; background: #f0f0f0; }
+        .success { color: green; }
+        .info { color: blue; }
+        button { padding: 10px 20px; margin: 10px; }
+    </style>
+</head>
+<body>
+    <h1>验证网站优化效果</h1>
+    
+    <div class="test-item">
+        <h3>1. 检查Gzip压缩</h3>
+        <p>打开开发者工具 (F12) → Network标签 → 刷新页面</p>
+        <p>查看Response Headers中的 <code class="info">Content-Encoding: gzip</code></p>
+        <p>查看Size列，应该看到两个值，如：<code>14KB (111KB)</code> - 压缩后/原始大小</p>
+    </div>
+    
+    <div class="test-item">
+        <h3>2. 检查缓存设置</h3>
+        <p>在Network标签中，查看CSS/JS文件的Response Headers</p>
+        <p>应该看到：<code class="info">Cache-Control: public, max-age=86400</code></p>
+        <p>第二次访问时，这些文件应该显示 <code class="success">(from cache)</code></p>
+    </div>
+    
+    <div class="test-item">
+        <h3>3. 性能测试</h3>
+        <button onclick="testPerformance()">测试页面加载速度</button>
+        <div id="results"></div>
+    </div>
+    
+    <div class="test-item">
+        <h3>4. 功能验证清单</h3>
+        <ul>
+            <li>✓ 游戏能正常加载和玩</li>
+            <li>✓ 全屏功能正常（特别是iOS）</li>
+            <li>✓ 评论能正常提交和显示</li>
+            <li>✓ 语言切换正常</li>
+            <li>✓ 所有链接正常工作</li>
+        </ul>
+    </div>
+
+    <script>
+    function testPerformance() {
+        const results = document.getElementById('results');
+        results.innerHTML = '测试中...';
+        
+        const startTime = performance.now();
+        
+        // 测试首页加载
+        fetch('/')
+            .then(response => {
+                const endTime = performance.now();
+                const loadTime = (endTime - startTime).toFixed(2);
+                
+                results.innerHTML = `
+                    <p class="success">✓ 首页加载时间: ${loadTime}ms</p>
+                    <p>Content-Type: ${response.headers.get('Content-Type')}</p>
+                    <p>Content-Encoding: ${response.headers.get('Content-Encoding') || '无压缩'}</p>
+                `;
+                
+                // 检查压缩
+                if (response.headers.get('Content-Encoding') === 'gzip') {
+                    results.innerHTML += '<p class="success">✓ Gzip压缩已启用</p>';
+                }
+            })
+            .catch(error => {
+                results.innerHTML = `<p style="color: red;">错误: ${error}</p>`;
+            });
+    }
+    </script>
+</body>
+</html>

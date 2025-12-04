@@ -1,0 +1,54 @@
+# Sprunki Phase 4
+
+> Sprunki Phase 4 is the latest update in the music rhythm game, offering new beats, characters, and challenges.
+
+Sprunki Phase 4 enhances the popular rhythm gaming experience with new songs, vibrant characters, smoother animations, and more complex challenges. Playable entirely in-browser, it welcomes both new players and returning fans to a dynamic musical adventure.
+
+## Core Content
+
+- [Homepage](https://sprunkiphase4.net/): Start your journey through the Sprunki universe. Access all phases, special versions, and multilingual options directly from the main page.
+
+- [Sprunki Phase 1](https://sprunkiphase4.net/sprunki-phase-1.html): The beginning of the Sprunki saga. Learn basic beats and rhythms in a simpler, more accessible gameplay environment, perfect for first-time players.
+
+- [Sprunki Phase 2](https://sprunkiphase4.net/sprunki-phase-2.html): Building on the foundations of Phase 1, this version introduces more dynamic beats, greater timing challenges, and new background animations to enrich the rhythm experience.
+
+- [Sprunki Phase 3](https://sprunkiphase4.net/sprunki-phase-3.html): Phase 3 elevates the rhythm challenge by adding brand-new characters, layered beats, and faster gameplay, pushing players to improve their precision and timing.
+
+- [Sprunki Phase 4](https://sprunkiphase4.net/sprunki-phase-4.html): The latest and most refined version to date. Experience cutting-edge beats, polished visuals, and challenging new levels designed for rhythm game enthusiasts seeking a fresh test of skill.
+
+- [Sprunki Phase 5](https://sprunkiphase4.net/sprunki-phase-5.html): A sneak peek into the future of Sprunki, introducing experimental beat patterns, advanced animations, and new character customization options.
+
+## Related Projects
+
+- [Sprunki Swapped](https://sprunkiphase4.net/sprunki-swapped.html): A creative spin on the original Sprunki games where beats and roles are swapped, challenging players to adapt to unexpected musical patterns.
+
+- [Sprunki Modded](https://sprunkiphase4.net/sprunki-modded.html): A collection of community-inspired mods that bring new visuals, beatmaps, and quirky challenges into the Sprunki gameplay experience.
+
+- [Sprunki Night Time](https://sprunkiphase4.net/sprunki-night-time.html): Explore the Sprunki universe at night. This version features darker, ambient beats and a relaxing nighttime aesthetic, offering a mellow alternative to high-intensity sessions.
+
+- [Sprunked Incredibox](https://sprunkiphase4.net/sprunked-incredibox.html): A crossover remix that blends Sprunki’s gameplay mechanics with the beatbox creativity of Incredibox. Experiment with musical layers and create your own rhythmic symphonies.
+
+## Useful Resources
+
+- [中文版首页 (Chinese Homepage)](https://sprunkiphase4.net/zh): Access the Sprunki games in Simplified Chinese for native speakers and learners.
+- [Español (Spanish Homepage)](https://sprunkiphase4.net/es): Play Sprunki Phase games in Spanish, fully localized for better engagement.
+- [Français (French Homepage)](https://sprunkiphase4.net/fr): French-speaking players can enjoy the full Sprunki experience with translated instructions and text.
+- [Deutsch (German Homepage)](https://sprunkiphase4.net/de): Dive into Sprunki's rhythmic world with full German localization.
+- [Русский (Russian Homepage)](https://sprunkiphase4.net/ru): Russian players can experience Sprunki gameplay natively without language barriers.
+- [日本語 (Japanese Homepage)](https://sprunkiphase4.net/ja): Japanese version available, offering localized beats, menus, and instructions.
+
+## Features
+
+- **Free to Play**: All Sprunki games are available without any downloads or registrations.
+- **Browser-Based**: Fully optimized for quick, responsive gameplay in modern browsers across desktop and mobile.
+- **Progressive Challenge Levels**: Each phase introduces more complex rhythms and gameplay mechanics.
+- **Multilingual Support**: Sprunki games are localized into multiple languages for a global audience.
+- **Creative Variants**: Includes official remixes and community-inspired projects for extended replay value.
+
+## Audience & Accessibility
+
+- **Primary Target**: Rhythm game fans, casual gamers, and music lovers worldwide.
+- **Age Recommendation**: Suitable for players aged 7 and above.
+- **Accessibility**: Designed for easy pick-up play without requiring gaming expertise.
+- **Language Coverage**: English (default), Chinese, Spanish, French, German, Russian, Japanese (more coming).
+

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>{{ _("About Sprunki Phase 4 | Learn More About Our Game") }}</title>
+    <meta name="description"
+          content="{{ _("Learn more about Sprunki Phase 4, the latest update in the music rhythm game, offering new beats, characters, and challenges.") }}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/language-selector.css') }}">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8336151654459672"
+            crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-8336151654459672">
+    
+    <!-- 多语言hreflang标签 -->
+    <link rel="alternate" hreflang="en" href="{{ urljoin(request.host_url, no_lang_path) }}">
+    {% for lang in languages %}
+        {% if lang.code != 'en' %}
+    <link rel="alternate" hreflang="{{ lang.code }}" href="{{ urljoin(request.host_url, lang.code + '/' + no_lang_path) }}">
+        {% endif %}
+    {% endfor %}
+    <link rel="alternate" hreflang="x-default" href="{{ urljoin(request.host_url, no_lang_path) }}">
+    
+    <style>
+        /* 面包屑导航样式 */
+        .breadcrumb {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+            font-size: 0.75rem;
+        }
+        
+        .breadcrumb-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.375rem 1rem;
+        }
+        
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.1875rem;
+            font-size: 0.6875rem;
+            line-height: 1.1;
+        }
+        
+        .breadcrumb-item {
+            display: flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.8);
+            transition: color 0.2s ease;
+        }
+        
+        .breadcrumb-item:hover {
+            color: white;
+        }
+        
+        .breadcrumb-link {
+            color: inherit;
+            text-decoration: none;
+            padding: 0.0625rem 0.25rem;
+            border-radius: 0.1875rem;
+            transition: background-color 0.2s ease;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+        
+        .breadcrumb-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .breadcrumb-current {
+            color: white;
+            font-weight: 500;
+            padding: 0.0625rem 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 180px;
+        }
+        
+        .breadcrumb-separator {
+            color: rgba(255, 255, 255, 0.5);
+            margin: 0 0.0625rem;
+            user-select: none;
+            font-size: 0.5rem;
+        }
+        
+        .breadcrumb-icon {
+            width: 0.625rem;
+            height: 0.625rem;
+            margin-right: 0.1875rem;
+            opacity: 0.8;
+            flex-shrink: 0;
+        }
+        
+        /* 移动端优化 */
+        @media (max-width: 640px) {
+            .breadcrumb-container {
+                padding: 0.25rem 1rem;
+            }
+            
+            .breadcrumb-nav {
+                font-size: 0.625rem;
+                gap: 0.125rem;
+            }
+            
+            .breadcrumb-link,
+            .breadcrumb-current {
+                padding: 0.03125rem 0.1875rem;
+            }
+            
+            .breadcrumb-icon {
+                width: 0.5rem;
+                height: 0.5rem;
+                margin-right: 0.125rem;
+            }
+            
+            .breadcrumb-separator {
+                margin: 0 0.03125rem;
+                font-size: 0.4375rem;
+            }
+            
+            .breadcrumb-current {
+                max-width: 100px;
+            }
+        }
+        
+        /* 覆盖可能的冲突样式 */
+        .breadcrumb * {
+            box-sizing: border-box;
+        }
+        
+        .breadcrumb a {
+            color: inherit !important;
+            text-decoration: none !important;
+            border: none !important;
+            background: none !important;
+            box-shadow: none !important;
+            transform: none !important;
+            text-transform: none !important;
+            letter-spacing: normal !important;
+            font-weight: normal !important;
+            font-size: inherit !important;
+            margin: 0 !important;
+        }
+        
+        .breadcrumb a:hover {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            border: none !important;
+            box-shadow: none !important;
+            transform: none !important;
+            color: white !important;
+        }
+        
+        .breadcrumb a:before {
+            display: none !important;
+        }
+    </style>
+</head>
+<body class="text-base md:text-lg bg-purple-50">
+<header class="bg-purple-700 text-white relative" role="banner">
+    <div class="container mx-auto px-4">
+        <nav class="flex flex-wrap items-center py-4" role="navigation" aria-label="Main navigation">
+            <div class="flex items-center">
+                {% if no_en_lang() == None %}
+                    <a href="/" class="text-2xl md:text-3xl font-bold" title="{{ _("sprunki phase 4") }}" aria-label="{{ _("sprunki phase 4 - Home") }}">{{ _("sprunki phase 4") }}</a>
+                {% else %}
+                    <a href="/{{ no_en_lang() }}" class="text-2xl md:text-3xl font-bold"
+                       title="{{ _("sprunki phase 4") }}" aria-label="{{ _("sprunki phase 4 - Home") }}">{{ _("sprunki phase 4") }}</a>
+                {% endif %}
+                
+                <div id="nav-menu" class="nav-menu hidden lg:flex ml-4" role="menu">
+                    {% if no_en_lang() == None %}
+                        <a href="/" title="{{ _("sprunki phase 4") }}"
+                           class="text-white hover:text-purple-200 text-base md:text-lg"
+                           role="menuitem">{{ _("Home") }}</a>
+                    {% else %}
+                        <a href="/{{ no_en_lang() }}" title="{{ _("sprunki phase 4") }}"
+                           class="text-white hover:text-purple-200 text-base md:text-lg"
+                           role="menuitem">{{ _("Home") }}</a>
+                    {% endif %}
+                    <a href="{{ url_for('base_url.article_list_demo', lang=no_en_lang(),category='sprunki-mod') }}"
+                       title="{{ _("sprunki mod") }}"
+                       class="text-white hover:text-purple-200 text-base md:text-lg"
+                       role="menuitem">{{ _("sprunki mod") }}</a>
+                </div>
+            </div>
+            
+            <div class="flex items-center ml-auto">
+                <!-- 语言选择器 -->
+                <div class="relative z-50">
+                    <button id="languageBtn"
+                            class="language-selector-btn flex items-center text-white hover:text-blue-300 transition-colors"
+                            aria-expanded="false"
+                            aria-controls="languageSelector"
+                            title="{{ _("Language") }}"
+                            aria-haspopup="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.56-.5-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.56.5.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    
+                    <!-- PC端下拉菜单 -->
+                    <div id="languageSelector" class="language-selector" role="menu" aria-label="Language selection">
+                        <div class="language-selector-content">
+                            {% for lang in languages %}
+                                {% if lang.code == 'en' %}
+                                    <a href="{{ urljoin(request.host_url, no_lang_path) }}"
+                                       class="language-option flex items-center px-4 py-2 hover:bg-purple-100 transition-colors"
+                                       role="menuitem"
+                                       aria-label="{{ lang.name }}">
+                                        <span class="language-icon mr-2">🌐</span>
+                                        <span class="language-name">{{ lang.name }}</span>
+                                    </a>
+                                {% else %}
+                                    <a href="{{ urljoin(request.host_url, lang.code + '/' + no_lang_path) }}"
+                                       class="language-option flex items-center px-4 py-2 hover:bg-purple-100 transition-colors"
+                                       role="menuitem"
+                                       aria-label="{{ lang.name }}">
+                                        <span class="language-icon mr-2">🌐</span>
+                                        <span class="language-name">{{ lang.name }}</span>
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- 移动端底部抽屉 -->
+                    <div id="mobileLanguageSelector" class="mobile-language-selector" role="dialog" aria-label="Language selection">
+                        <div class="mobile-language-selector-content">
+                            <div class="mobile-language-header">
+                                <h3 class="text-lg font-semibold">{{ _("Select Language") }}</h3>
+                                <button id="closeMobileLanguageBtn" class="close-btn" aria-label="Close">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="mobile-language-options">
+                                {% for lang in languages %}
+                                    {% if lang.code == 'en' %}
+                                        <a href="{{ urljoin(request.host_url, no_lang_path) }}"
+                                           class="mobile-language-option flex items-center px-4 py-3 hover:bg-purple-100 transition-colors"
+                                           role="menuitem"
+                                           aria-label="{{ lang.name }}">
+                                            <span class="language-icon mr-3">🌐</span>
+                                            <span class="language-name">{{ lang.name }}</span>
+                                        </a>
+                                    {% else %}
+                                        <a href="{{ urljoin(request.host_url, lang.code + '/' + no_lang_path) }}"
+                                           class="mobile-language-option flex items-center px-4 py-3 hover:bg-purple-100 transition-colors"
+                                           role="menuitem"
+                                           aria-label="{{ lang.name }}">
+                                            <span class="language-icon mr-3">🌐</span>
+                                            <span class="language-name">{{ lang.name }}</span>
+                                        </a>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 汉堡菜单按钮 -->
+                <button class="nav-toggle text-white focus:outline-none lg:hidden ml-2" 
+                        aria-label="Toggle navigation"
+                        aria-expanded="false"
+                        aria-controls="nav-menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- 面包屑导航 -->
+<nav class="breadcrumb" role="navigation" aria-label="Breadcrumb">
+    <div class="breadcrumb-container">
+        <ol class="breadcrumb-nav" itemscope itemtype="https://schema.org/BreadcrumbList">
+            <!-- 首页链接 -->
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                {% if no_en_lang() == None %}
+                    <a href="/" class="breadcrumb-link" itemprop="item" title="{{ _("sprunki phase 4") }}">
+                {% else %}
+                    <a href="/{{ no_en_lang() }}" class="breadcrumb-link" itemprop="item" title="{{ _("sprunki phase 4") }}">
+                {% endif %}
+                    <svg class="breadcrumb-icon" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 011.414 0l7 7A1 1 0 0117 11h-1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-3a1 1 0 00-1-1H9a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-6H3a1 1 0 01-.707-1.707l7-7z" clip-rule="evenodd"/>
+                    </svg>
+                    <span itemprop="name">{{ _("sprunki phase 4") }}</span>
+                </a>
+                <meta itemprop="position" content="1" />
+            </li>
+            
+            <!-- 当前关于页 -->
+            <li class="breadcrumb-separator">
+                <svg width="6" height="6" viewBox="0 0 6 6" fill="currentColor" aria-hidden="true">
+                    <circle cx="3" cy="3" r="1"/>
+                </svg>
+            </li>
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span class="breadcrumb-current" itemprop="name">{{ _("About") }}</span>
+                <meta itemprop="position" content="2" />
+            </li>
+        </ol>
+    </div>
+</nav>
+
+<main class="container mx-auto p-4" role="main">
+    <section class="mt-8" aria-labelledby="about-title">
+        <h1 id="about-title" class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-purple-800">{{ _("About Sprunki Phase 4") }}</h1>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 text-purple-700">{{ _("Our Story") }}</h2>
+            <p class="text-gray-700 mb-4 text-sm sm:text-base md:text-lg">{{ _("Sprunki Phase 4 is a revolutionary music rhythm game that combines creative beat-making with engaging gameplay. Born from a passion for music and gaming, we've created an experience that brings together players from all walks of life.") }}</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 text-purple-700">{{ _("Our Mission") }}</h2>
+            <p class="text-gray-700 mb-4 text-sm sm:text-base md:text-lg">{{ _("We're dedicated to creating an inclusive gaming environment where music lovers can express their creativity and share their unique beats with the world. Our goal is to make music creation accessible and enjoyable for everyone.") }}</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 text-purple-700">{{ _("Features") }}</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-purple-600 mb-2">{{ _("Creative Freedom") }}</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-700">
+                        <li>{{ _("Unlimited beat combinations") }}</li>
+                        <li>{{ _("Custom character designs") }}</li>
+                        <li>{{ _("Unique sound effects") }}</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-purple-600 mb-2">{{ _("User Experience") }}</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-700">
+                        <li>{{ _("Intuitive controls") }}</li>
+                        <li>{{ _("Smooth animations") }}</li>
+                        <li>{{ _("Responsive design") }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 text-purple-700">{{ _("Contact Us") }}</h2>
+            <p class="text-gray-700 mb-4 text-sm sm:text-base md:text-lg">{{ _("Have questions or feedback? We'd love to hear from you! Reach out to us at:") }}</p>
+            <a href="mailto:sprunkiphase4.net@gmail.com" class="text-purple-600 hover:text-purple-800">sprunkiphase4.net@gmail.com</a>
+        </div>
+
+        <!-- 评论系统区域 -->
+        <section class="mt-8 comments-section p-4 md:p-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                <h2 class="text-xl md:text-2xl font-semibold text-purple-800 mb-2 md:mb-0">{{_("Your Feedback")}}</h2>
+                <div class="comment-stats">
+                    <span id="total-comments">0 comments</span>
+                    <span class="hidden md:inline">•</span>
+                    <span id="average-rating">0.0 ★</span>
+                </div>
+            </div>
+
+            <!-- 评论系统容器 -->
+            <div id="comment-system"></div>
+        </section>
+    </section>
+</main>
+
+<!-- 引入评论系统CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/comment-system.css') }}">
+
+<footer class="bg-purple-800 text-white mt-8 p-4" role="contentinfo">
+    <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0">
+        <p class="text-center sm:text-left text-sm sm:text-base">&copy; {{ _("2024 sprunki phase 4") }}</p>
+        <div class="flex gap-4 sm:gap-6 text-sm sm:text-base">
+            <a href="/about.html" class="text-white hover:text-purple-200" aria-label="{{ _('About Sprunki Phase 4') }}">{{ _("About") }}</a>
+            <a href="/privacy-policy.html" class="text-white hover:text-purple-200" aria-label="{{ _('Privacy Policy') }}">{{ _("Privacy Policy") }}</a>
+        </div>
+    </div>
+</footer>
+
+<script src="{{ url_for('static', filename='style/script.js') }}"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZV62Y6WE6"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-NZV62Y6WE6');
+</script>
+
+<!-- 回复表单模板 -->
+<template id="reply-form-template">
+    <div class="reply-form bg-gray-50 p-4 rounded-lg mt-2">
+        <h4 class="font-medium mb-3">Reply to @<span class="reply-to-username"></span></h4>
+        <div class="space-y-3">
+            <input type="text" class="reply-username w-full rounded-md" placeholder="Your name (optional)">
+            <div class="relative">
+                <div class="emoji-picker-container absolute right-2 top-2 z-10">
+                    <!-- 表情选择器将在JS中动态生成 -->
+                </div>
+                <textarea class="reply-content w-full rounded-md pr-12" placeholder="Enter your reply..." rows="3"
+                          required></textarea>
+            </div>
+            <div class="flex space-x-2">
+                <button type="button"
+                        class="submit-reply-btn bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md transition-colors">
+                    Submit
+                </button>
+                <button type="button"
+                        class="cancel-reply-btn bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md transition-colors">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- 引入评论系统JavaScript -->
+<script src="{{ url_for('static', filename='js/comment-system.js') }}"></script>
+
+<!-- 初始化评论系统 -->
+<script>
+    // 初始化评论系统
+    document.addEventListener('DOMContentLoaded', function() {
+        // 先初始化语言选择器，然后初始化评论系统
+        setTimeout(function() {
+            window.commentSystem = new CommentSystem({
+                articleUrl: '/about',  // 关于页面的固定URL
+                containerId: 'comment-system',  // 容器ID
+                apiBase: '/api/comments',  // API基础路径
+                perPage: 10,  // 每页显示评论数
+                enableReply: true,  // 启用回复功能
+                enableLike: true,  // 启用点赞功能
+                enableRating: true  // 启用评分功能
+            });
+        }, 100);
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 初始化语言选择器功能
+        const languageBtn = document.getElementById('languageBtn');
+        const languageSelector = document.getElementById('languageSelector');
+        const mobileLanguageSelector = document.getElementById('mobileLanguageSelector');
+        const closeMobileLanguageBtn = document.getElementById('closeMobileLanguageBtn');
+        
+        if (languageBtn && languageSelector && mobileLanguageSelector) {
+            languageBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const isExpanded = languageBtn.getAttribute('aria-expanded') === 'true';
+                languageBtn.setAttribute('aria-expanded', !isExpanded);
+                
+                // 根据屏幕宽度决定显示哪个选择器
+                if (window.innerWidth < 768) {
+                    // 移动端显示底部抽屉
+                    mobileLanguageSelector.classList.toggle('show');
+                } else {
+                    // PC端显示下拉菜单
+                    languageSelector.classList.toggle('show');
+                }
+            });
+            
+            // 关闭移动端选择器
+            if (closeMobileLanguageBtn) {
+                closeMobileLanguageBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    closeMobileLanguageSelector();
+                });
+            }
+            
+            // 点击外部关闭语言选择器
+            document.addEventListener('click', function(e) {
+                if (!languageBtn.contains(e.target) && 
+                    !languageSelector.contains(e.target) && 
+                    !mobileLanguageSelector.contains(e.target)) {
+                    closeAllSelectors();
+                }
+            });
+        }
+    });
+
+    function closeMobileLanguageSelector() {
+        const mobileLanguageSelector = document.getElementById('mobileLanguageSelector');
+        const languageBtn = document.getElementById('languageBtn');
+
+        if (mobileLanguageSelector) {
+            mobileLanguageSelector.classList.remove('show');
+        }
+        if (languageBtn) {
+            languageBtn.setAttribute('aria-expanded', 'false');
+        }
+    }
+
+    function closeAllSelectors() {
+        const languageSelector = document.getElementById('languageSelector');
+        const mobileLanguageSelector = document.getElementById('mobileLanguageSelector');
+        const languageBtn = document.getElementById('languageBtn');
+
+        if (languageSelector) {
+            languageSelector.classList.remove('show');
+        }
+        if (mobileLanguageSelector) {
+            mobileLanguageSelector.classList.remove('show');
+        }
+        if (languageBtn) {
+            languageBtn.setAttribute('aria-expanded', 'false');
+        }
+    }
+
+    // 监听窗口大小变化
+    window.addEventListener('resize', function() {
+        const isMobile = window.innerWidth < 768;
+        const languageSelector = document.getElementById('languageSelector');
+        const mobileLanguageSelector = document.getElementById('mobileLanguageSelector');
+
+        if (isMobile) {
+            if (languageSelector) {
+                languageSelector.classList.remove('show');
+            }
+        } else {
+            if (mobileLanguageSelector) {
+                mobileLanguageSelector.classList.remove('show');
+            }
+        }
+    });
+</script>
+</body>
+</html> 

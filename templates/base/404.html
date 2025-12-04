@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _("Page Not Found") }} - Sprunki Phase 4</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Bungee&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/main.css') }}">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.ico') }}">
+    <meta name="theme-color" content="#18181b">
+
+    <style>
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+            background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+        }
+
+        .error-icon {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 1.5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-700));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(168, 85, 247, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .error-icon svg {
+            width: 60px;
+            height: 60px;
+            color: white;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .error-code {
+            font-family: var(--font-display);
+            font-size: 6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--color-primary-400), var(--color-primary-300));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .error-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .error-message {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+            max-width: 400px;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .error-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.5rem;
+            border-radius: var(--radius-xl);
+            font-size: 0.9375rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all var(--transition-normal);
+            cursor: pointer;
+            border: none;
+        }
+
+        .error-btn-primary {
+            background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-700));
+            color: white;
+            box-shadow: 0 4px 14px rgba(168, 85, 247, 0.35);
+        }
+
+        .error-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.5);
+        }
+
+        .error-btn-secondary {
+            background: var(--color-bg-glass);
+            color: var(--color-text-primary);
+            border: 1px solid var(--color-border-default);
+        }
+
+        .error-btn-secondary:hover {
+            border-color: var(--color-primary-500);
+            background: rgba(168, 85, 247, 0.1);
+        }
+
+        .error-btn svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        .suggested-games {
+            margin-top: 3rem;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .suggested-title {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .suggested-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .suggested-card {
+            background: var(--color-bg-glass);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            text-decoration: none;
+            transition: all var(--transition-normal);
+        }
+
+        .suggested-card:hover {
+            border-color: var(--color-primary-400);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(168, 85, 247, 0.2);
+        }
+
+        .suggested-card img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+        }
+
+        .suggested-card-title {
+            padding: 0.625rem;
+            font-size: 0.8125rem;
+            color: var(--color-text-primary);
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @media (max-width: 480px) {
+            .error-code {
+                font-size: 4rem;
+            }
+
+            .error-title {
+                font-size: 1.25rem;
+            }
+
+            .error-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .error-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .suggested-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-page">
+        <div class="error-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+        </div>
+
+        <div class="error-code">404</div>
+        <h1 class="error-title">{{ _("Page Not Found") }}</h1>
+        <p class="error-message">{{ _("Oops! The page you're looking for doesn't exist or has been moved. Let's get you back to the music!") }}</p>
+
+        <div class="error-actions">
+            <a href="{{ url_for('base_url.index_lang', lang=no_en_lang()) }}" class="error-btn error-btn-primary">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                </svg>
+                {{ _("Back to Home") }}
+            </a>
+            <button onclick="history.back()" class="error-btn error-btn-secondary">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                {{ _("Go Back") }}
+            </button>
+        </div>
+
+        <div class="suggested-games">
+            <p class="suggested-title">{{ _("Try these popular games instead:") }}</p>
+            <div class="suggested-grid">
+                <a href="{{ url_for('base_url.article_info_demo', lang=no_en_lang(), article_url='sprunki-phase-4') }}" class="suggested-card">
+                    <img src="https://img.sprunki.net/image/sprunki-phase-4.webp" alt="Sprunki Phase 4" loading="lazy">
+                    <div class="suggested-card-title">Sprunki Phase 4</div>
+                </a>
+                <a href="{{ url_for('base_url.article_info_demo', lang=no_en_lang(), article_url='sprunki-phase-3') }}" class="suggested-card">
+                    <img src="https://img.sprunki.net/image/sprunki-phase-3.webp" alt="Sprunki Phase 3" loading="lazy">
+                    <div class="suggested-card-title">Sprunki Phase 3</div>
+                </a>
+                <a href="{{ url_for('base_url.article_info_demo', lang=no_en_lang(), article_url='sprunki') }}" class="suggested-card">
+                    <img src="https://img.sprunki.net/image/sprunki.webp" alt="Sprunki" loading="lazy">
+                    <div class="suggested-card-title">Sprunki</div>
+                </a>
+                <a href="{{ url_for('base_url.article_info_demo', lang=no_en_lang(), article_url='sprunki-incredibox') }}" class="suggested-card">
+                    <img src="https://img.sprunki.net/image/sprunki-phase-4.webp" alt="Sprunki Incredibox" loading="lazy">
+                    <div class="suggested-card-title">Sprunki Incredibox</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

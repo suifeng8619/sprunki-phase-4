@@ -1,0 +1,152 @@
+{# 页脚组件 #}
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-content">
+            {# Logo 和简介 #}
+            <div class="footer-brand">
+                <a href="{{ url_for('base_url.index_lang', lang=no_en_lang()) }}" class="footer-logo">
+                    Sprunki Phase 4
+                </a>
+                <p class="footer-desc">
+                    {{ _("Play the best Sprunki music games online for free. Create amazing music with our collection of Sprunki mods and phases.") }}
+                </p>
+            </div>
+
+            {# 快速链接 #}
+            <div class="footer-links">
+                <h4 class="footer-title">{{ _("Quick Links") }}</h4>
+                <nav class="footer-nav">
+                    <a href="{{ url_for('base_url.index_lang', lang=no_en_lang()) }}">{{ _("Home") }}</a>
+                    <a href="{{ url_for('base_url.article_list_demo', lang=no_en_lang(), category='all-games') }}">{{ _("All Games") }}</a>
+                    <a href="{{ url_for('base_url.article_info_demo', lang=no_en_lang(), article_url='about-us') }}">{{ _("About Us") }}</a>
+                    <a href="{{ url_for('base_url.article_info_demo', lang=no_en_lang(), article_url='privacy-policy') }}">{{ _("Privacy Policy") }}</a>
+                </nav>
+            </div>
+
+            {# 热门游戏 #}
+            <div class="footer-links">
+                <h4 class="footer-title">{{ _("Popular Games") }}</h4>
+                <nav class="footer-nav">
+                    <a href="{{ url_for('base_url.article_info_demo', lang=no_en_lang(), article_url='sprunki-phase-4') }}">Sprunki Phase 4</a>
+                    <a href="{{ url_for('base_url.article_info_demo', lang=no_en_lang(), article_url='sprunki-phase-3') }}">Sprunki Phase 3</a>
+                    <a href="{{ url_for('base_url.article_info_demo', lang=no_en_lang(), article_url='sprunki-incredibox') }}">Sprunki Incredibox</a>
+                </nav>
+            </div>
+        </div>
+
+        {# 版权信息 #}
+        <div class="footer-bottom">
+            <p class="footer-copyright">
+                &copy; <span id="footer-year">2025</span> Sprunki Phase 4. {{ _("All rights reserved.") }}
+            </p>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .site-footer {
+        background: var(--color-bg-secondary);
+        border-top: 1px solid var(--color-border-subtle);
+        padding: 3rem 1rem 1.5rem;
+        margin-top: 4rem;
+    }
+
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .footer-content {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 3rem;
+        margin-bottom: 2rem;
+    }
+
+    .footer-brand {
+        max-width: 320px;
+    }
+
+    .footer-logo {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        background: linear-gradient(135deg, var(--color-primary-400), var(--color-primary-600));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-decoration: none;
+        display: inline-block;
+        margin-bottom: 0.75rem;
+    }
+
+    .footer-desc {
+        color: var(--color-text-secondary);
+        font-size: 0.875rem;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    .footer-title {
+        color: var(--color-text-primary);
+        font-size: 0.9375rem;
+        font-weight: 600;
+        margin: 0 0 1rem;
+    }
+
+    .footer-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .footer-nav a {
+        color: var(--color-text-secondary);
+        font-size: 0.875rem;
+        text-decoration: none;
+        transition: color var(--transition-fast);
+    }
+
+    .footer-nav a:hover {
+        color: var(--color-primary-400);
+    }
+
+    .footer-bottom {
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--color-border-subtle);
+        text-align: center;
+    }
+
+    .footer-copyright {
+        color: var(--color-text-muted);
+        font-size: 0.8125rem;
+        margin: 0;
+    }
+
+    @media (max-width: 768px) {
+        .site-footer {
+            padding: 2rem 1rem 1rem;
+        }
+
+        .footer-content {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .footer-brand {
+            max-width: none;
+            text-align: center;
+        }
+
+        .footer-links {
+            text-align: center;
+        }
+
+        .footer-nav {
+            align-items: center;
+        }
+    }
+</style>
+
+<script>
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+</script>

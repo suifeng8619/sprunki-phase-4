@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>评论系统演示 - 新功能展示</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/comment-system.css') }}">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hero-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .article-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1 class="hero-title">🚀 评论系统新功能演示</h1>
+            <p style="font-size: 1.2rem; color: #6b7280; margin-bottom: 30px;">
+                体验我们最新开发的评论系统功能！
+            </p>
+            
+            <!-- 功能展示 -->
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>嵌套回复</h3>
+                    <p>支持最多3层回复，@提及功能</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👍</div>
+                    <h3>智能点赞</h3>
+                    <p>防重复点赞，本地状态记录</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>现代UI</h3>
+                    <p>渐变背景，动画效果，响应式设计</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>实时统计</h3>
+                    <p>评论数量，平均评分，评分分布</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="article-content">
+            <h2 style="color: #374151; margin-bottom: 20px;">📝 功能说明</h2>
+            <div style="line-height: 1.8; color: #6b7280;">
+                <h3>🎯 已实现功能：</h3>
+                <ul style="margin-left: 20px;">
+                    <li><strong>多页面集成</strong> - 评论系统已集成到内容页和关于页</li>
+                    <li><strong>嵌套回复</strong> - 支持最多3层回复，可以@提及其他用户</li>
+                    <li><strong>智能点赞</strong> - 防重复点赞，带动画效果的视觉反馈</li>
+                    <li><strong>现代UI</strong> - 使用渐变背景、动画效果、响应式设计</li>
+                    <li><strong>实时统计</strong> - 显示评论总数、平均评分和评分分布</li>
+                </ul>
+                
+                <h3>🔮 体验指南：</h3>
+                <ol style="margin-left: 20px;">
+                    <li>发表一条评论试试评分功能</li>
+                    <li>点击回复按钮体验嵌套回复</li>
+                    <li>尝试点赞评论，注意动画效果</li>
+                    <li>查看页面顶部的统计数据更新</li>
+                </ol>
+                
+                <p style="background: #f3f4f6; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                    💡 <strong>提示</strong>：点赞状态会保存在浏览器本地存储中，刷新页面也不会丢失。
+                </p>
+            </div>
+        </div>
+        
+        <!-- 评论系统容器 -->
+        <div id="comment-system"></div>
+    </div>
+
+    <!-- 回复表单模板 -->
+    <template id="reply-form-template">
+        <div class="reply-form bg-gray-50 p-4 rounded-lg mt-2">
+            <h4 class="font-medium mb-3">Reply to @<span class="reply-to-username"></span></h4>
+            <div class="space-y-3">
+                <input type="text" class="reply-username w-full rounded-md" placeholder="Your name (optional)">
+                <div class="relative">
+                    <div class="emoji-picker-container absolute right-2 top-2 z-10">
+                        <!-- 表情选择器将在JS中动态生成 -->
+                    </div>
+                    <textarea class="reply-content w-full rounded-md pr-12" placeholder="Enter your reply..." rows="3"
+                              required></textarea>
+                </div>
+                <div class="flex space-x-2">
+                    <button type="button"
+                            class="submit-reply-btn bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md transition-colors">
+                        Submit
+                    </button>
+                    <button type="button"
+                            class="cancel-reply-btn bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md transition-colors">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- 引入评论系统JavaScript -->
+    <script src="{{ url_for('static', filename='js/comment-system.js') }}"></script>
+    
+    <!-- 初始化评论系统 -->
+    <script>
+        // 初始化评论系统
+        document.addEventListener('DOMContentLoaded', function() {
+            window.commentSystem = new CommentSystem({
+                articleUrl: '/comment-demo',  // 演示页面的URL
+                containerId: 'comment-system',  // 容器ID
+                apiBase: '/api/comments',  // API基础路径
+                perPage: 10,  // 每页显示评论数
+                enableReply: true,  // 启用回复功能
+                enableLike: true,  // 启用点赞功能
+                enableRating: true  // 启用评分功能
+            });
+            
+            // 添加一些演示功能
+            console.log('🎉 评论系统演示页面已加载');
+            console.log('🔧 可用功能: 评论、回复、点赞、评分、分页');
+            console.log('🎨 UI增强: 动画效果、渐变背景、响应式设计');
+        });
+        
+        // 添加一些有趣的交互效果
+        document.addEventListener('mousemove', function(e) {
+            const hero = document.querySelector('.hero-section');
+            const rect = hero.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
+            const y = ((e.clientY - rect.top) / rect.height - 0.5) * 10;
+            hero.style.transform = `perspective(1000px) rotateX(${y}deg) rotateY(${x}deg)`;
+        });
+        
+        document.querySelector('.hero-section').addEventListener('mouseleave', function() {
+            this.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+        });
+    </script>
+</body>
+</html> 

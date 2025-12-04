@@ -1,0 +1,25 @@
+{% extends "base/head_foot.html" %}
+{% block title %}Home - My Website{% endblock %}
+
+{% block content %}
+
+<main class="container mx-auto mt-8 p-4">
+    <section class="mt-4">
+            <h1 class="text-xl font-semibold mb-2 text-purple-800">{{_("sprunked incredibox mod")}}</h1>
+            <div class="grid grid-cols-3 md:grid-cols-6 gap-2">
+                <!-- Game 1 -->
+                {% for datas in article_list %}
+                <div class="bg-white rounded-lg shadow-md p-1">
+                    <a href="{{datas.url}}.html" title="{{datas.title}}">
+                        <div class="aspect-[4/3] overflow-hidden rounded-lg">
+                            <img src="{{datas.image}}" alt="{{datas.title}}" class="w-full h-full object-cover" title="{{datas.title}}" loading="lazy" />
+                        </div>
+                        <p>{{datas.title}}</p>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+</main>
+
+{% endblock %}

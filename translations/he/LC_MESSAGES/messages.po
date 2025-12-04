@@ -1,0 +1,543 @@
+# Hebrew translations for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-07-12 03:25+0800\n"
+"PO-Revision-Date: 2024-11-30 03:44+0800\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: he\n"
+"Language-Team: he <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: templates/base/head_foot.html:6
+msgid "Free Play"
+msgstr "משחק חינם"
+
+#: templates/base/head_foot.html:6
+msgid "Game Online"
+msgstr "משחק אונליין"
+
+#: templates/base/head_foot.html:502 templates/base/head_foot.html:505
+#: templates/base/head_foot.html:510 templates/base/head_foot.html:514
+#: templates/base/head_foot.html:631 templates/base/head_foot.html:633
+#: templates/base/head_foot.html:638 templates/web/about.html:161
+#: templates/web/about.html:164 templates/web/about.html:169
+#: templates/web/about.html:173 templates/web/about.html:280
+#: templates/web/about.html:282 templates/web/about.html:287
+#: templates/web/index.html:184 templates/web/index.html:187
+#: templates/web/index.html:192 templates/web/index.html:196
+#: templates/web/index.html:307 templates/web/index.html:309
+#: templates/web/index.html:314 templates/web/index.html:330
+#: templates/web/index.html:334 templates/web/index.html:381
+#: templates/web/index.html:384 templates/web/privacy_policy.html:160
+#: templates/web/privacy_policy.html:163 templates/web/privacy_policy.html:168
+#: templates/web/privacy_policy.html:172 templates/web/privacy_policy.html:279
+#: templates/web/privacy_policy.html:281 templates/web/privacy_policy.html:286
+msgid "sprunki phase 4"
+msgstr "ספראנקי שלב 4"
+
+#: templates/base/head_foot.html:502 templates/base/head_foot.html:505
+#: templates/web/about.html:161 templates/web/about.html:164
+#: templates/web/index.html:184 templates/web/index.html:187
+#: templates/web/privacy_policy.html:160 templates/web/privacy_policy.html:163
+#, fuzzy
+msgid "sprunki phase 4 - Home"
+msgstr "שלב 4 מוד ספרנקי"
+
+#: templates/base/head_foot.html:512 templates/base/head_foot.html:516
+#: templates/web/about.html:171 templates/web/about.html:175
+#: templates/web/index.html:194 templates/web/index.html:198
+#: templates/web/privacy_policy.html:170 templates/web/privacy_policy.html:174
+msgid "Home"
+msgstr ""
+
+#: templates/base/head_foot.html:520 templates/base/head_foot.html:522
+#: templates/web/index.html:202 templates/web/index.html:204
+#, fuzzy
+msgid "sprunki"
+msgstr "ספראנקי שלב 4"
+
+#: templates/base/head_foot.html:524 templates/base/head_foot.html:526
+msgid "sprunki phase 3"
+msgstr "שלב 3 של ספרונקי"
+
+#: templates/base/head_foot.html:528 templates/base/head_foot.html:530
+#: templates/base/head_foot.html:651 templates/base/head_foot.html:655
+#: templates/web/about.html:178 templates/web/about.html:180
+#: templates/web/index.html:206 templates/web/index.html:208
+#: templates/web/privacy_policy.html:177 templates/web/privacy_policy.html:179
+#, fuzzy
+msgid "sprunki mod"
+msgstr "ספראנקי שלב 4"
+
+#: templates/base/head_foot.html:541 templates/web/about.html:191
+#: templates/web/index.html:219 templates/web/privacy_policy.html:190
+msgid "Language"
+msgstr "שפה"
+
+#: templates/base/head_foot.html:577 templates/web/about.html:227
+#: templates/web/index.html:255 templates/web/privacy_policy.html:226
+#, fuzzy
+msgid "Select Language"
+msgstr "שפה"
+
+#: templates/base/head_foot.html:678 templates/web/about.html:370
+#: templates/web/index.html:664 templates/web/privacy_policy.html:344
+msgid "2024 sprunki phase 4"
+msgstr "2024 ספראנקי שלב 4"
+
+#: templates/base/head_foot.html:680 templates/web/about.html:308
+#: templates/web/about.html:372 templates/web/index.html:666
+#: templates/web/privacy_policy.html:346
+#, fuzzy
+msgid "About Sprunki Phase 4"
+msgstr "ספראנקי שלב 4"
+
+#: templates/base/head_foot.html:680 templates/web/about.html:299
+#: templates/web/about.html:372 templates/web/index.html:666
+#: templates/web/privacy_policy.html:346
+msgid "About"
+msgstr ""
+
+#: templates/base/head_foot.html:681 templates/web/about.html:373
+#: templates/web/index.html:667 templates/web/privacy_policy.html:298
+#: templates/web/privacy_policy.html:307 templates/web/privacy_policy.html:347
+msgid "Privacy Policy"
+msgstr ""
+
+#: templates/base/head_foot1.html:13
+msgid "TikTok Voice Generator"
+msgstr "גנרטור קול של טיק טוק"
+
+#: templates/base/head_foot1.html:26
+msgid "© 2024 TikTok Voice Generator."
+msgstr "© 2024 טיקTok גנרטור קול."
+
+#: templates/web/about.html:6
+msgid "About Sprunki Phase 4 | Learn More About Our Game"
+msgstr ""
+
+#: templates/web/about.html:8
+#, fuzzy
+msgid ""
+"Learn more about Sprunki Phase 4, the latest update in the music rhythm "
+"game, offering new beats, characters, and challenges."
+msgstr ""
+"ספראנקי פאזה 4 הוא העדכון האחרון במשחק קצב המוזיקה, המציע קצב חדשים, "
+"דמויות ואתגרים."
+
+#: templates/web/about.html:311
+msgid "Our Story"
+msgstr ""
+
+#: templates/web/about.html:312
+msgid ""
+"Sprunki Phase 4 is a revolutionary music rhythm game that combines "
+"creative beat-making with engaging gameplay. Born from a passion for "
+"music and gaming, we've created an experience that brings together "
+"players from all walks of life."
+msgstr ""
+
+#: templates/web/about.html:316
+msgid "Our Mission"
+msgstr ""
+
+#: templates/web/about.html:317
+msgid ""
+"We're dedicated to creating an inclusive gaming environment where music "
+"lovers can express their creativity and share their unique beats with the"
+" world. Our goal is to make music creation accessible and enjoyable for "
+"everyone."
+msgstr ""
+
+#: templates/web/about.html:321
+msgid "Features"
+msgstr ""
+
+#: templates/web/about.html:324
+msgid "Creative Freedom"
+msgstr ""
+
+#: templates/web/about.html:326
+msgid "Unlimited beat combinations"
+msgstr ""
+
+#: templates/web/about.html:327
+msgid "Custom character designs"
+msgstr ""
+
+#: templates/web/about.html:328
+msgid "Unique sound effects"
+msgstr ""
+
+#: templates/web/about.html:332
+msgid "User Experience"
+msgstr ""
+
+#: templates/web/about.html:334
+msgid "Intuitive controls"
+msgstr ""
+
+#: templates/web/about.html:335
+msgid "Smooth animations"
+msgstr ""
+
+#: templates/web/about.html:336
+msgid "Responsive design"
+msgstr ""
+
+#: templates/web/about.html:343
+msgid "Contact Us"
+msgstr ""
+
+#: templates/web/about.html:344
+msgid ""
+"Have questions or feedback? We'd love to hear from you! Reach out to us "
+"at:"
+msgstr ""
+
+#: templates/web/about.html:351
+msgid "Your Feedback"
+msgstr ""
+
+#: templates/web/category.html:8
+msgid "sprunked incredibox mod"
+msgstr "מוד אינקרדיבוקס של ספרנקד"
+
+#: templates/web/content.html:249 templates/web/index.html:342
+msgid "Audio Guide"
+msgstr ""
+
+#: templates/web/content.html:251 templates/web/index.html:344
+msgid ""
+"If you're not hearing game audio, please check if your device is muted. "
+"If it's unmuted but still no sound, tap the browser's share button and "
+"find 'Add to Home Screen', then open the app from your home screen for "
+"perfect fullscreen and proper audio."
+msgstr ""
+
+#: templates/web/content.html:287
+msgid "Click to enable sound"
+msgstr ""
+
+#: templates/web/content.html:313 templates/web/index.html:392
+#, fuzzy
+msgid "View Comments"
+msgstr "המלצות משחקים"
+
+#: templates/web/content.html:325 templates/web/index.html:402
+msgid "Native Fullscreen"
+msgstr ""
+
+#: templates/web/content.html:340 templates/web/index.html:417
+msgid "Pseudo Fullscreen"
+msgstr ""
+
+#: templates/web/content.html:357 templates/web/index.html:433
+msgid "Refresh Game"
+msgstr ""
+
+#: templates/web/content.html:367
+msgid "Game Recommendations"
+msgstr "המלצות משחקים"
+
+#: templates/web/content.html:375 templates/web/content.html:376
+#: templates/web/index.html:451 templates/web/index.html:454
+#: templates/web/index.html:455
+#, fuzzy
+msgid "Play"
+msgstr "שחק משחק"
+
+#: templates/web/content.html:375 templates/web/content.html:376
+#: templates/web/index.html:454 templates/web/index.html:455
+#, fuzzy
+msgid "mod online"
+msgstr "משחק אונליין"
+
+#: templates/web/content.html:390 templates/web/index.html:469
+msgid "Player Reviews"
+msgstr ""
+
+#: templates/web/content.html:405 templates/web/content.html:462
+#: templates/web/index.html:484 templates/web/index.html:535
+msgid "Your Rating"
+msgstr ""
+
+#: templates/web/content.html:433 templates/web/content.html:491
+#: templates/web/index.html:508 templates/web/index.html:560
+msgid "Share your thoughts about this game..."
+msgstr ""
+
+#: templates/web/content.html:440 templates/web/content.html:496
+#: templates/web/index.html:514 templates/web/index.html:565
+msgid "Your name (optional)"
+msgstr ""
+
+#: templates/web/content.html:443 templates/web/content.html:498
+#: templates/web/index.html:516 templates/web/index.html:567
+msgid "Your email (optional)"
+msgstr ""
+
+#: templates/web/content.html:447 templates/web/content.html:504
+#: templates/web/index.html:520 templates/web/index.html:573
+msgid "Post Comment"
+msgstr ""
+
+#: templates/web/content.html:516 templates/web/index.html:585
+msgid "Loading comments..."
+msgstr ""
+
+#: templates/web/content.html:523 templates/web/index.html:592
+#, fuzzy
+msgid "Load More Comments"
+msgstr "המלצות משחקים"
+
+#: templates/web/content.html:543 templates/web/index.html:659
+msgid "Back to Game"
+msgstr ""
+
+#: templates/web/index.html:6
+msgid "sprunki phase 4 | Free Play sprunki phase 4 Online"
+msgstr "שלב 4 של sprunki | משחק חינם sprunki שלב 4 אונליין"
+
+#: templates/web/index.html:8 templates/web/index.html:335
+msgid ""
+"Sprunki Phase 4 is the latest update in the music rhythm game, offering "
+"new beats, characters, and challenges. "
+msgstr ""
+"ספראנקי פאזה 4 הוא העדכון האחרון במשחק קצב המוזיקה, המציע קצב חדשים, "
+"דמויות ואתגרים."
+
+#: templates/web/index.html:329
+#, fuzzy
+msgid "sprunki phase 4 game icon"
+msgstr "שלב 4 מוד ספרנקי"
+
+#: templates/web/index.html:352
+#, fuzzy
+msgid "Play Sprunki Phase 4 game"
+msgstr "שלב 4 מוד ספרנקי"
+
+#: templates/web/index.html:359
+msgid "PLAY GAME"
+msgstr "שחק משחק"
+
+#: templates/web/index.html:364
+#, fuzzy
+msgid "sprunki phase 4 game"
+msgstr "שלב 4 מוד ספרנקי"
+
+#: templates/web/index.html:366
+#, fuzzy
+msgid "Sprunki Phase 4 game interface"
+msgstr "שלב 4 מוד ספרנקי"
+
+#: templates/web/index.html:444
+msgid "sprunki phase 4 mod"
+msgstr "שלב 4 מוד ספרנקי"
+
+#: templates/web/index.html:598
+msgid "Get Ready for sprunki phase 4"
+msgstr "התכונן לשלב 4 של sprunki"
+
+#: templates/web/index.html:600
+msgid ""
+"Yo! Let me tell you about sprunki phase 4 - this mind-blowing fan mod "
+"that's completely revolutionized Incredibox. sprunki phase 4 brings sick "
+"beats and contemporary flavors that you won't find anywhere else. As the "
+"latest addition to the lineup, sprunki phase 4 has been crushing it in "
+"the Incredibox scene, bringing together veteran players and fresh faces "
+"alike."
+msgstr ""
+"היי! תן לי לספר לך על sprunki שלב 4 - מוד אוהדים מדהים הזה ששינה לחלוטין "
+"את Incredibox. sprunki שלב 4 מביא ביטים מדהימים וטעמים עכשוויים שלא תמצא "
+"בשום מקום אחר. כההוספה האחרונה לקו, sprunki שלב 4 שובר את השוק בסצנת "
+"Incredibox, מחבר בין שחקנים ותיקים לפנים חדשות כאחד."
+
+#: templates/web/index.html:602
+msgid "Why sprunki phase 4 is Absolutely Fire:"
+msgstr "למה שלב 4 של sprunki הוא פשוט מדהים:"
+
+#: templates/web/index.html:606
+msgid "Next-Level Visuals in sprunki phase 4"
+msgstr "ויזואליות ברמה הבאה בשלב 4 של sprunki"
+
+#: templates/web/index.html:608
+msgid "One-of-a-kind character designs that'll blow your mind"
+msgstr "עיצובים של דמויות ייחודיות שיתפוצצו לכם את המוח"
+
+#: templates/web/index.html:609
+msgid "Butter-smooth animations that hit different"
+msgstr "אנימציות חלקות כמו חמאה שפוגעות בצורה שונה"
+
+#: templates/web/index.html:610
+msgid "Sleek, contemporary aesthetic that's pure eye candy"
+msgstr "אסתטיקה חלקה ומודרנית שהיא טהור סוכריות לעיניים"
+
+#: templates/web/index.html:611
+msgid "Drop-dead gorgeous color palettes that pop off"
+msgstr "פלטות צבעים מדהימות שמעוררות עניין"
+
+#: templates/web/index.html:616
+msgid "sprunki phase 4's Insane Audio Experience"
+msgstr "החווייה האודיאו המטורפת של שלב 4 של sprunki"
+
+#: templates/web/index.html:618
+msgid "Fresh beats and sounds that'll get you hooked"
+msgstr "קצב וצלילים חדשים שיתפסו אותך."
+
+#: templates/web/index.html:619
+msgid "Genre-bending vibes to fuel your creativity"
+msgstr "ויברציות חורגות ז'אנרים להניע את היצירתיות שלך"
+
+#: templates/web/index.html:620
+msgid "Epic mixing tools for that professional touch"
+msgstr "כלי מיקסינג אפיים למגע מקצועי"
+
+#: templates/web/index.html:621
+msgid "Crystal-clear sound quality that slaps"
+msgstr "איכות סאונד צלולה שנוגעת"
+
+#: templates/web/index.html:626
+msgid "User-Friendly Goodness of sprunki phase 4"
+msgstr "הטוב הידידותי למשתמש של שלב sprunki 4"
+
+#: templates/web/index.html:628
+msgid "Controls that feel like second nature"
+msgstr "בקרות שמרגישות כמו טבע שני"
+
+#: templates/web/index.html:629
+msgid "Zero learning curve - just jump right in"
+msgstr "אפס עקומת למידה - פשוט קפוץ פנימה"
+
+#: templates/web/index.html:630
+msgid "Everything's right where you need it"
+msgstr "הכל במקום שאתה צריך את זה"
+
+#: templates/web/index.html:631
+msgid "Real-time feedback that keeps you in the zone"
+msgstr "משוב בזמן אמת שמחזיק אותך באזור"
+
+#: templates/web/index.html:636
+msgid "sprunki phase 4's Unlimited Creative Potential"
+msgstr "פוטנציאל יצירתי בלתי מוגבל של שלב 4 של sprunki"
+
+#: templates/web/index.html:638
+msgid "Let your imagination run wild with endless possibilities"
+msgstr "תן לדמיון שלך לרוץ Wild עם אפשרויות אין סופיות"
+
+#: templates/web/index.html:639
+msgid "Stack sounds like a boss"
+msgstr "סטאק נשמע כמו בוס"
+
+#: templates/web/index.html:640
+msgid "Craft any vibe that speaks to you"
+msgstr "עצב כל אווירה שמדברת אליך"
+
+#: templates/web/index.html:641
+msgid "Put your own unique spin on everything"
+msgstr "שימו את הסגנון הייחודי שלכם על כל דבר"
+
+#: templates/web/index.html:646
+msgid ""
+"What's absolutely wild about sprunki phase 4 is how it keeps everything "
+"we love about Incredibox while cranking the creativity factor up to "
+"eleven. Whether you're an OG or just diving into sprunki phase 4, you'll "
+"find yourself completely absorbed in this musical playground."
+msgstr ""
+"מה שבאמת מדהים בשלב 4 של sprunki הוא איך שהוא שומר על כל מה שאנחנו אוהבים"
+" על Incredibox בזמן שהוא מעלה את גורם היצירתיות ל-11. בין אם אתה OG או "
+"סתם נכנס לשלב 4 של sprunki, תמצא את עצמך שקוע לחלוטין במשחק המוזיקלי הזה."
+
+#: templates/web/index.html:648
+msgid ""
+"For real, this upgrade is a testament to how talented our community is - "
+"sprunki phase 4 shows that passionate fans can take something dope and "
+"make it even dopier while staying true to what made the original so "
+"special."
+msgstr ""
+"באמת, השדרוג הזה הוא עדות לכמה שהקהילה שלנו מוכשרת - שלב 4 של sprunki "
+"מראה שאוהדים נלהבים יכולים לקחת משהו מגניב ולעשות אותו אפילו מגניב יותר "
+"תוך שמירה על מה שעשה את המקורי כל כך מיוחד."
+
+#: templates/web/privacy_policy.html:6
+#, fuzzy
+msgid "Privacy Policy | Sprunki Phase 4"
+msgstr "התכונן לשלב 4 של sprunki"
+
+#: templates/web/privacy_policy.html:7
+msgid ""
+"Read our privacy policy to understand how we collect, use, and protect "
+"your data when using Sprunki Phase 4."
+msgstr ""
+
+#: templates/web/privacy_policy.html:309
+msgid "This Privacy Policy was last updated on Jan 1 2024."
+msgstr ""
+
+#: templates/web/privacy_policy.html:313
+msgid "1. General Information"
+msgstr ""
+
+#: templates/web/privacy_policy.html:314
+msgid ""
+"All features on the Sprunki Phase 4 Site are available without the need "
+"for registration by Users. No personal data (such as email addresses and "
+"phone numbers) are requested from users."
+msgstr ""
+
+#: templates/web/privacy_policy.html:318
+msgid "2. Data Collection"
+msgstr ""
+
+#: templates/web/privacy_policy.html:319
+msgid ""
+"Our servers automatically recognize visitors' domain names and IP "
+"addresses. The Sprunki Phase 4 Site may gather anonymous 'traffic data' "
+"that does not personally identify you, but that data may be helpful for "
+"marketing purposes or for improving the services we offer."
+msgstr ""
+
+#: templates/web/privacy_policy.html:323
+msgid "3. Cookies"
+msgstr ""
+
+#: templates/web/privacy_policy.html:324
+msgid ""
+"Like many websites and applications, this Sprunki Phase 4 Site makes use "
+"of 'cookies' which are saved on the user's computer. Cookies help us "
+"provide you with a better experience and allow us to improve our "
+"services."
+msgstr ""
+
+#: templates/web/privacy_policy.html:328
+msgid "4. Children's Privacy"
+msgstr ""
+
+#: templates/web/privacy_policy.html:329
+msgid ""
+"We recognize the importance of safeguarding the privacy of children and "
+"encourage parents to check and monitor their children's use of online "
+"activities regularly."
+msgstr ""
+
+#: templates/web/privacy_policy.html:333
+msgid "5. Contact Us"
+msgstr ""
+
+#: templates/web/privacy_policy.html:334
+msgid "If you have any questions about this Privacy Policy, please contact us at:"
+msgstr ""
+
+#~ msgid "sprunked incredibox"
+#~ msgstr "ספראנקד אינקרדיבוקס"
+

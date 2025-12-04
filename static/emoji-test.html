@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表情选择器测试页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-container {
+            margin-bottom: 30px;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .comment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .relative {
+            position: relative;
+        }
+        textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            min-height: 100px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #8b5cf6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #7c3aed;
+        }
+        .emoji-container {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+        .emoji-button {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .emoji-button:hover {
+            transform: scale(1.2);
+        }
+        .emoji-panel {
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            width: 300px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: none;
+            padding: 10px;
+            margin-bottom: 10px;
+            z-index: 100;
+        }
+        .emoji-panel.show {
+            display: block;
+        }
+        .emoji-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 5px;
+        }
+        .emoji {
+            font-size: 24px;
+            text-align: center;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        .emoji:hover {
+            background-color: #f0f0f0;
+        }
+        .test-log {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>表情选择器测试页面</h1>
+    <p>这个页面用于独立测试表情选择器功能，不依赖于主应用的其他部分。</p>
+    
+    <div class="test-container">
+        <h2>测试1: 简单表情选择器</h2>
+        <div class="comment-form">
+            <div class="relative">
+                <div class="emoji-container">
+                    <button type="button" class="emoji-button" id="emoji-btn-1">😊</button>
+                    <div class="emoji-panel" id="emoji-panel-1">
+                        <div class="emoji-grid">
+                            <span class="emoji">😊</span>
+                            <span class="emoji">😂</span>
+                            <span class="emoji">❤️</span>
+                            <span class="emoji">👍</span>
+                            <span class="emoji">🎉</span>
+                            <span class="emoji">✨</span>
+                            <span class="emoji">🌟</span>
+                            <span class="emoji">💯</span>
+                            <span class="emoji">🔥</span>
+                            <span class="emoji">👏</span>
+                            <span class="emoji">🙏</span>
+                            <span class="emoji">💪</span>
+                            <span class="emoji">🤔</span>
+                            <span class="emoji">🤣</span>
+                            <span class="emoji">😅</span>
+                            <span class="emoji">😆</span>
+                        </div>
+                    </div>
+                </div>
+                <textarea id="comment-1" placeholder="输入你的评论..."></textarea>
+            </div>
+            <button type="button">提交评论</button>
+        </div>
+        <div class="test-log" id="log-1"></div>
+    </div>
+    
+    <div class="test-container">
+        <h2>测试2: SVG图标表情选择器</h2>
+        <div class="comment-form">
+            <div class="relative">
+                <div class="emoji-container">
+                    <button type="button" class="emoji-button" id="emoji-btn-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                        </svg>
+                    </button>
+                    <div class="emoji-panel" id="emoji-panel-2">
+                        <div class="emoji-grid">
+                            <span class="emoji">😊</span>
+                            <span class="emoji">😂</span>
+                            <span class="emoji">❤️</span>
+                            <span class="emoji">👍</span>
+                            <span class="emoji">🎉</span>
+                            <span class="emoji">✨</span>
+                            <span class="emoji">🌟</span>
+                            <span class="emoji">💯</span>
+                            <span class="emoji">🔥</span>
+                            <span class="emoji">👏</span>
+                            <span class="emoji">🙏</span>
+                            <span class="emoji">💪</span>
+                            <span class="emoji">🤔</span>
+                            <span class="emoji">🤣</span>
+                            <span class="emoji">😅</span>
+                            <span class="emoji">😆</span>
+                        </div>
+                    </div>
+                </div>
+                <textarea id="comment-2" placeholder="输入你的评论..."></textarea>
+            </div>
+            <button type="button">提交评论</button>
+        </div>
+        <div class="test-log" id="log-2"></div>
+    </div>
+
+    <script>
+        // 记录日志的辅助函数
+        function log(id, message) {
+            const logElement = document.getElementById('log-' + id);
+            if (logElement) {
+                const time = new Date().toLocaleTimeString();
+                logElement.innerHTML += `<div>[${time}] ${message}</div>`;
+                logElement.scrollTop = logElement.scrollHeight;
+            }
+        }
+
+        // 测试1：简单表情选择器
+        document.addEventListener('DOMContentLoaded', function() {
+            // 测试1
+            const emojiBtn1 = document.getElementById('emoji-btn-1');
+            const emojiPanel1 = document.getElementById('emoji-panel-1');
+            const comment1 = document.getElementById('comment-1');
+            
+            if (emojiBtn1 && emojiPanel1) {
+                log(1, '初始化测试1表情选择器');
+                
+                // 绑定按钮点击事件
+                emojiBtn1.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    log(1, '表情按钮被点击');
+                    emojiPanel1.classList.toggle('show');
+                });
+                
+                // 绑定表情点击事件
+                emojiPanel1.querySelectorAll('.emoji').forEach(emoji => {
+                    emoji.addEventListener('click', function() {
+                        const emojiChar = this.textContent;
+                        log(1, `选择表情: ${emojiChar}`);
+                        
+                        // 插入表情到文本框
+                        const start = comment1.selectionStart;
+                        comment1.value = comment1.value.substring(0, start) + 
+                            emojiChar + comment1.value.substring(comment1.selectionEnd);
+                        comment1.focus();
+                        comment1.selectionStart = comment1.selectionEnd = start + emojiChar.length;
+                        
+                        // 关闭面板
+                        emojiPanel1.classList.remove('show');
+                    });
+                });
+                
+                // 点击外部关闭面板
+                document.addEventListener('click', function(e) {
+                    if (!emojiBtn1.contains(e.target) && !emojiPanel1.contains(e.target)) {
+                        emojiPanel1.classList.remove('show');
+                    }
+                });
+            }
+            
+            // 测试2
+            const emojiBtn2 = document.getElementById('emoji-btn-2');
+            const emojiPanel2 = document.getElementById('emoji-panel-2');
+            const comment2 = document.getElementById('comment-2');
+            
+            if (emojiBtn2 && emojiPanel2) {
+                log(2, '初始化测试2表情选择器');
+                
+                // 绑定按钮点击事件
+                emojiBtn2.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    log(2, '表情按钮被点击');
+                    emojiPanel2.classList.toggle('show');
+                });
+                
+                // 绑定表情点击事件
+                emojiPanel2.querySelectorAll('.emoji').forEach(emoji => {
+                    emoji.addEventListener('click', function() {
+                        const emojiChar = this.textContent;
+                        log(2, `选择表情: ${emojiChar}`);
+                        
+                        // 插入表情到文本框
+                        const start = comment2.selectionStart;
+                        comment2.value = comment2.value.substring(0, start) + 
+                            emojiChar + comment2.value.substring(comment2.selectionEnd);
+                        comment2.focus();
+                        comment2.selectionStart = comment2.selectionEnd = start + emojiChar.length;
+                        
+                        // 关闭面板
+                        emojiPanel2.classList.remove('show');
+                    });
+                });
+                
+                // 点击外部关闭面板
+                document.addEventListener('click', function(e) {
+                    if (!emojiBtn2.contains(e.target) && !emojiPanel2.contains(e.target)) {
+                        emojiPanel2.classList.remove('show');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,189 @@
+{#
+骨架屏组件
+
+使用方式：
+{% include "components/loading-skeleton.html" %}
+
+或指定类型：
+{% with skeleton_type="card" %}
+    {% include "components/loading-skeleton.html" %}
+{% endwith %}
+#}
+
+{% set type = skeleton_type|default('card') %}
+
+{% if type == 'card' %}
+{# 卡片骨架屏 #}
+<div class="skeleton-card-wrapper">
+    <div class="skeleton skeleton-image"></div>
+    <div class="skeleton-content">
+        <div class="skeleton skeleton-title"></div>
+    </div>
+</div>
+
+{% elif type == 'comment' %}
+{# 评论骨架屏 #}
+<div class="skeleton-comment-wrapper">
+    <div class="skeleton skeleton-avatar"></div>
+    <div class="skeleton-comment-content">
+        <div class="skeleton skeleton-name"></div>
+        <div class="skeleton skeleton-text"></div>
+        <div class="skeleton skeleton-text-short"></div>
+    </div>
+</div>
+
+{% elif type == 'game' %}
+{# 游戏区域骨架屏 #}
+<div class="skeleton-game-wrapper">
+    <div class="skeleton skeleton-game-icon"></div>
+    <div class="skeleton skeleton-game-title"></div>
+    <div class="skeleton skeleton-game-desc"></div>
+    <div class="skeleton skeleton-game-btn"></div>
+</div>
+
+{% else %}
+{# 默认骨架屏 #}
+<div class="skeleton-default-wrapper">
+    <div class="skeleton skeleton-line"></div>
+    <div class="skeleton skeleton-line-short"></div>
+</div>
+{% endif %}
+
+<style>
+    /* 骨架屏基础样式 */
+    .skeleton {
+        background: linear-gradient(
+            90deg,
+            var(--color-bg-elevated) 0%,
+            var(--color-bg-secondary) 50%,
+            var(--color-bg-elevated) 100%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+        border-radius: var(--radius-lg);
+    }
+
+    @keyframes shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+    }
+
+    /* 卡片骨架屏 */
+    .skeleton-card-wrapper {
+        background: var(--color-bg-glass);
+        border: 1px solid var(--color-border-subtle);
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+    }
+
+    .skeleton-image {
+        aspect-ratio: 4/3;
+        border-radius: 0;
+    }
+
+    .skeleton-content {
+        padding: 0.75rem;
+    }
+
+    .skeleton-title {
+        height: 1rem;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    /* 评论骨架屏 */
+    .skeleton-comment-wrapper {
+        display: flex;
+        gap: 1rem;
+        padding: 1rem;
+        background: var(--color-bg-glass);
+        border: 1px solid var(--color-border-subtle);
+        border-radius: var(--radius-xl);
+    }
+
+    .skeleton-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    .skeleton-comment-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .skeleton-name {
+        height: 0.875rem;
+        width: 120px;
+    }
+
+    .skeleton-text {
+        height: 0.75rem;
+        width: 100%;
+    }
+
+    .skeleton-text-short {
+        height: 0.75rem;
+        width: 60%;
+    }
+
+    /* 游戏区域骨架屏 */
+    .skeleton-game-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 2rem;
+    }
+
+    .skeleton-game-icon {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+    }
+
+    .skeleton-game-title {
+        height: 2rem;
+        width: 200px;
+    }
+
+    .skeleton-game-desc {
+        height: 0.875rem;
+        width: 300px;
+        max-width: 80%;
+    }
+
+    .skeleton-game-btn {
+        height: 48px;
+        width: 160px;
+        border-radius: 9999px;
+    }
+
+    /* 默认骨架屏 */
+    .skeleton-default-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .skeleton-line {
+        height: 1rem;
+        width: 100%;
+    }
+
+    .skeleton-line-short {
+        height: 1rem;
+        width: 70%;
+    }
+
+    /* 减少动画 */
+    @media (prefers-reduced-motion: reduce) {
+        .skeleton {
+            animation: none;
+            background: var(--color-bg-elevated);
+        }
+    }
+</style>

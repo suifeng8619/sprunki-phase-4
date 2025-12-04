@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA 测试页面</title>
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin: 8px 0;
+            font-weight: bold;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .warning { background: #fff3cd; color: #856404; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        button {
+            background: #8b5cf6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 8px 8px 8px 0;
+        }
+        button:hover { background: #7c3aed; }
+    </style>
+</head>
+<body>
+    <h1>🔧 PWA 配置测试</h1>
+    
+    <div class="test-card">
+        <h2>📱 设备检测</h2>
+        <div id="device-info"></div>
+    </div>
+    
+    <div class="test-card">
+        <h2>🔗 网络状态</h2>
+        <div id="network-info"></div>
+    </div>
+    
+    <div class="test-card">
+        <h2>⚙️ PWA 支持检测</h2>
+        <div id="pwa-support"></div>
+    </div>
+    
+    <div class="test-card">
+        <h2>📄 资源测试</h2>
+        <div id="resource-test"></div>
+        <button onclick="testResources()">测试资源加载</button>
+    </div>
+    
+    <div class="test-card">
+        <h2>🔧 Service Worker 状态</h2>
+        <div id="sw-status"></div>
+        <button onclick="registerSW()">注册 Service Worker</button>
+        <button onclick="unregisterSW()">卸载 Service Worker</button>
+    </div>
+    
+    <div class="test-card">
+        <h2>📱 安装测试</h2>
+        <div id="install-status"></div>
+        <button onclick="triggerInstall()">触发安装</button>
+    </div>
+
+    <script>
+        // 设备检测
+        function detectDevice() {
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+            const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+            const isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
+                                window.navigator.standalone || 
+                                document.referrer.includes('android-app://');
+            
+            document.getElementById('device-info').innerHTML = `
+                <div class="status info">User Agent: ${navigator.userAgent}</div>
+                <div class="status ${isIOS ? 'success' : 'info'}">iOS 设备: ${isIOS ? '是' : '否'}</div>
+                <div class="status ${isSafari ? 'success' : 'info'}">Safari 浏览器: ${isSafari ? '是' : '否'}</div>
+                <div class="status ${isStandalone ? 'success' : 'warning'}">独立模式: ${isStandalone ? '是' : '否'}</div>
+            `;
+        }
+
+        // 网络状态
+        function checkNetwork() {
+            const protocol = location.protocol;
+            const isHTTPS = protocol === 'https:';
+            
+            document.getElementById('network-info').innerHTML = `
+                <div class="status info">当前协议: ${protocol}</div>
+                <div class="status ${isHTTPS ? 'success' : 'error'}">HTTPS: ${isHTTPS ? '是' : '否'}</div>
+                <div class="status info">在线状态: ${navigator.onLine ? '在线' : '离线'}</div>
+            `;
+        }
+
+        // PWA 支持检测
+        function checkPWASupport() {
+            const hasSW = 'serviceWorker' in navigator;
+            const hasManifest = document.querySelector('link[rel="manifest"]');
+            const hasBeforeInstallPrompt = 'onbeforeinstallprompt' in window;
+            
+            document.getElementById('pwa-support').innerHTML = `
+                <div class="status ${hasSW ? 'success' : 'error'}">Service Worker: ${hasSW ? '支持' : '不支持'}</div>
+                <div class="status ${hasManifest ? 'success' : 'error'}">Manifest: ${hasManifest ? '已配置' : '未配置'}</div>
+                <div class="status ${hasBeforeInstallPrompt ? 'success' : 'info'}">安装提示: ${hasBeforeInstallPrompt ? '支持' : '不支持 (iOS正常)'}</div>
+            `;
+        }
+
+        // 资源测试
+        async function testResources() {
+            const resources = [
+                '{{ url_for("static", filename="manifest.json") }}',
+                '{{ url_for("static", filename="pwa-sw.js") }}',
+                '{{ url_for("static", filename="icon-192.png") }}',
+                '{{ url_for("static", filename="icon-512.png") }}'
+            ];
+            
+            let results = '';
+            for (const resource of resources) {
+                try {
+                    const response = await fetch(resource);
+                    const status = response.ok ? 'success' : 'error';
+                    results += `<div class="status ${status}">${resource}: ${response.status}</div>`;
+                } catch (error) {
+                    results += `<div class="status error">${resource}: 加载失败</div>`;
+                }
+            }
+            
+            document.getElementById('resource-test').innerHTML = results;
+        }
+
+        // Service Worker 操作
+        async function registerSW() {
+            if ('serviceWorker' in navigator) {
+                try {
+                    const registration = await navigator.serviceWorker.register('{{ url_for("static", filename="pwa-sw.js") }}');
+                    document.getElementById('sw-status').innerHTML = `
+                        <div class="status success">注册成功: ${registration.scope}</div>
+                    `;
+                } catch (error) {
+                    const registration = await navigator.serviceWorker.register('{{ url_for("static", filename="pwa-sw.js") }}');
+                    document.getElementById('sw-status').innerHTML = `
+                        <div class="status error">注册失败: ${error.message}</div>
+                    `;
+                }
+            } else {
+                document.getElementById('sw-status').innerHTML = `
+                    <div class="status error">不支持 Service Worker</div>
+                `;
+            }
+        }
+
+        async function unregisterSW() {
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                for (const registration of registrations) {
+                    await registration.unregister();
+                }
+                document.getElementById('sw-status').innerHTML = `
+                    <div class="status info">已卸载所有 Service Worker</div>
+                `;
+            }
+        }
+
+        // 安装测试
+        let deferredPrompt;
+        // 多行注释
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('install-status').innerHTML = `
+                <div class="status success">可以安装! beforeinstallprompt 事件已触发</div>
+            `;
+        });
+        /*
+  async function triggerInstall() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                document.getElementById('install-status').innerHTML = `
+                    <div class="status ${outcome === 'accepted' ? 'success' : 'warning'}">
+                        用户选择: ${outcome === 'accepted' ? '同意安装' : '拒绝安装'}
+                    </div>
+                `;
+                deferredPrompt = null;
+            } else {
+                document.getElementById('install-status').innerHTML = `
+                    <div class="status warning">无法安装 - 可能已安装或浏览器不支持</div>
+                `;
+            }
+        }
+        */
+
+
+        // 初始化
+        detectDevice();
+        checkNetwork();
+        checkPWASupport();
+        
+        // 定期更新状态
+        setInterval(() => {
+            checkNetwork();
+        }, 5000);
+    </script>
+</body>
+</html>

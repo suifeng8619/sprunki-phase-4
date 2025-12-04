@@ -1,0 +1,154 @@
+{#
+游戏卡片组件
+
+使用方式：
+{% with game=game_data %}
+    {% include "components/game-card.html" %}
+{% endwith %}
+
+或者直接传入变量：
+{% set game = {'url': 'xxx', 'image': 'xxx', 'title': 'xxx'} %}
+{% include "components/game-card.html" %}
+#}
+
+<div class="game-card group">
+    <a href="{{ url_for('base_url.article_info_demo', lang=no_en_lang(), article_url=game.url) }}"
+       class="game-card-link"
+       title="{{ _('Play') }} {{ game.title }}">
+        <div class="game-card-image-wrapper">
+            <img src="{{ game.image }}"
+                 alt="{{ _('Play') }} {{ game.title }} {{ _('mod online') }}"
+                 loading="lazy"
+                 class="game-card-image">
+            {# 悬停时的播放图标 #}
+            <div class="game-card-overlay">
+                <div class="game-card-play-icon">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="game-card-content">
+            <h3 class="game-card-title">{{ game.title }}</h3>
+        </div>
+    </a>
+</div>
+
+<style>
+    .game-card {
+        background: var(--color-bg-glass);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--color-border-subtle);
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        transition: all var(--transition-normal);
+    }
+
+    .game-card:hover {
+        border-color: var(--color-primary-400);
+        box-shadow: 0 8px 32px rgba(168, 85, 247, 0.2);
+        transform: translateY(-4px);
+    }
+
+    .game-card-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .game-card-image-wrapper {
+        position: relative;
+        aspect-ratio: 4/3;
+        overflow: hidden;
+    }
+
+    .game-card-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform var(--transition-slow);
+    }
+
+    .game-card:hover .game-card-image {
+        transform: scale(1.08);
+    }
+
+    .game-card-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity var(--transition-normal);
+    }
+
+    .game-card:hover .game-card-overlay {
+        opacity: 1;
+    }
+
+    .game-card-play-icon {
+        width: 3.5rem;
+        height: 3.5rem;
+        background: var(--color-primary-500);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        transform: scale(0.8);
+        transition: transform var(--transition-normal);
+        box-shadow: 0 4px 20px rgba(168, 85, 247, 0.5);
+    }
+
+    .game-card:hover .game-card-play-icon {
+        transform: scale(1);
+    }
+
+    .game-card-content {
+        padding: 0.75rem;
+    }
+
+    .game-card-title {
+        font-size: 0.8125rem;
+        font-weight: 500;
+        text-align: center;
+        color: var(--color-text-primary);
+        margin: 0;
+        transition: color var(--transition-fast);
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        line-height: 1.3;
+        min-height: 2.1em;
+    }
+
+    .game-card:hover .game-card-title {
+        color: var(--color-primary-400);
+    }
+
+    @media (max-width: 480px) {
+        .game-card-play-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+        .game-card-play-icon svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        .game-card-title {
+            font-size: 0.8125rem;
+        }
+
+        .game-card-content {
+            padding: 0.5rem;
+        }
+    }
+</style>

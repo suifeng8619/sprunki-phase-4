@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _("sprunki phase 4 | Free Play sprunki phase 4 Online") }}</title>
+    <meta name="description" content="{{ _("Sprunki Phase 4 is the latest update in the music rhythm game, offering new beats, characters, and challenges. ") }}">
+    <link rel="canonical" href="{{ request.url }}">
+
+    {# Open Graph 标签 #}
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:title" content="{{ _("sprunki phase 4 | Free Play sprunki phase 4 Online") }}">
+    <meta property="og:description" content="{{ _("Sprunki Phase 4 is the latest update in the music rhythm game, offering new beats, characters, and challenges. ") }}">
+    <meta property="og:image" content="https://img.sprunki.net/image/sprunki-phase-4.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Sprunki Phase 4">
+    <meta property="og:locale" content="{{ get_locale() }}">
+
+    {# Twitter Card 标签 #}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ _("sprunki phase 4 | Free Play sprunki phase 4 Online") }}">
+    <meta name="twitter:description" content="{{ _("Sprunki Phase 4 is the latest update in the music rhythm game, offering new beats, characters, and challenges. ") }}">
+    <meta name="twitter:image" content="https://img.sprunki.net/image/sprunki-phase-4.webp">
+
+    {# 结构化数据 #}
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "VideoGame",
+            "name": "Sprunki Phase 4",
+            "description": "Sprunki Phase 4 is the latest update in the music rhythm game, offering new beats, characters, and challenges.",
+            "genre": ["Music Game", "Rhythm Game"],
+            "gamePlatform": "Web Browser",
+            "applicationCategory": "Game",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock"
+            },
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.5",
+                "ratingCount": "1000"
+            },
+            "image": "https://img.sprunki.net/image/sprunki-phase-4.webp",
+            "url": "https://sprunkiphase4.net"
+        }
+    </script>
+
+    {# 核心样式 #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Bungee&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/main.css') }}">
+
+    {# 主题切换按钮样式修复 - 绕过CSS文件截断问题 #}
+    <style>
+        .theme-toggle {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            width: 40px !important;
+            height: 40px !important;
+            min-width: 40px !important;
+            min-height: 40px !important;
+            flex-shrink: 0 !important;
+            border-radius: var(--radius-xl, 1rem);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+        }
+        .theme-toggle svg {
+            width: 1.25rem !important;
+            height: 1.25rem !important;
+            transition: all 0.2s ease;
+        }
+        .theme-toggle .sun-icon {
+            position: absolute !important;
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+        .theme-toggle .moon-icon {
+            position: absolute !important;
+            opacity: 0;
+            transform: rotate(-90deg) scale(0);
+        }
+        [data-theme="light"] .theme-toggle .sun-icon {
+            opacity: 0;
+            transform: rotate(90deg) scale(0);
+        }
+        [data-theme="light"] .theme-toggle .moon-icon {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+        [data-theme="light"] .theme-toggle {
+            background: rgba(0, 0, 0, 0.08);
+            border-color: rgba(0, 0, 0, 0.15);
+            color: #1e293b;
+        }
+        [data-theme="light"] .theme-toggle:hover {
+            background: rgba(0, 0, 0, 0.12);
+        }
+    </style>
+
+    {# 多语言 hreflang 标签 #}
+    <link rel="alternate" hreflang="en" href="{{ urljoin(request.host_url, no_lang_path) }}">
+    {% for lang in languages %}
+        {% if lang.code != 'en' %}
+    <link rel="alternate" hreflang="{{ lang.code }}" href="{{ urljoin(request.host_url, lang.code + '/' + no_lang_path) }}">
+        {% endif %}
+    {% endfor %}
+    <link rel="alternate" hreflang="x-default" href="{{ urljoin(request.host_url, no_lang_path) }}">
+
+    {# PWA 配置 #}
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Sprunki P4">
+    <meta name="theme-color" content="#0f0a1f">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='icon-180.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    {# 广告meta (脚本延迟加载到body底部) #}
+    <meta name="google-adsense-account" content="ca-pub-8336151654459672">
+</head>
+<body>
+    {# 导航头部 #}
+    {% include "components/header.html" %}
+
+    {# 面包屑导航 #}
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb-list" itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a href="{{ url_for('base_url.index_lang', lang=no_en_lang()) }}" class="breadcrumb-link breadcrumb-home" itemprop="item">
+                        <svg class="breadcrumb-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 011.414 0l7 7A1 1 0 0117 11h-1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-3a1 1 0 00-1-1H9a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-6H3a1 1 0 01-.707-1.707l7-7z" clip-rule="evenodd"/>
+                        </svg>
+                        <span itemprop="name">{{ _("sprunki phase 4") }}</span>
+                    </a>
+                    <meta itemprop="position" content="1"/>
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        {# 游戏区域 #}
+        <section id="game_section" class="game-section" aria-labelledby="game-title">
+            <div class="game-container">
+                {# 游戏介绍 #}
+                <div id="game_intro" class="game-intro">
+                    <div class="game-icon">
+                        <img src="https://img.sprunki.net/image/sprunki-phase-4.webp"
+                             alt="{{ _("sprunki phase 4 game icon") }}"
+                             loading="eager">
+                    </div>
+                    <h1 id="game-title" class="game-title">{{ _("sprunki phase 4") }}</h1>
+                    <p class="game-description">{{ _("Sprunki Phase 4 is the latest update in the music rhythm game, offering new beats, characters, and challenges. ") }}</p>
+
+                    {# 音频提示 #}
+                    <div class="audio-notice">
+                        <div class="audio-notice-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                            </svg>
+                        </div>
+                        <div class="audio-notice-content">
+                            <div class="audio-notice-title">{{ _("Audio Guide") }}</div>
+                            <div class="audio-notice-text">{{ _("If you're not hearing game audio, please check if your device is muted. If it's unmuted but still no sound, tap the browser's share button and find 'Add to Home Screen', then open the app from your home screen for perfect fullscreen and proper audio.") }}</div>
+                        </div>
+                    </div>
+
+                    <button class="play-button" onclick="playGameSafe()" aria-label="{{ _('Play Sprunki Phase 4 game') }}">
+                        <svg class="play-button-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                        </svg>
+                        {{ _("PLAY GAME") }}
+                    </button>
+                </div>
+
+                {# 游戏 iframe #}
+                <iframe id="game_iframe"
+                        class="game-iframe hidden"
+                        title="{{ _("sprunki phase 4 game") }}"
+                        loading="lazy"
+                        src="https://imager.sprunkiphase4.net/game/sprunki-phase-4.html"
+                        allow="autoplay; fullscreen; microphone; camera; midi; encrypted-media; gyroscope; accelerometer; picture-in-picture; web-share"
+                        allowfullscreen
+                        sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-pointer-lock allow-orientation-lock allow-modals">
+                </iframe>
+            </div>
+        </section>
+
+        {# 游戏状态栏 #}
+        <div id="game-status-bar" class="game-status-bar">
+            <div class="game-status-info">
+                <div class="game-status-icon">
+                    <img src="https://img.sprunki.net/image/sprunki-phase-4.webp" alt="{{ _("sprunki phase 4") }}">
+                </div>
+                <h2 class="game-status-title">{{ _("sprunki phase 4") }}</h2>
+            </div>
+            <div class="game-status-controls">
+                <button id="comments-btn" onclick="scrollToComments()" class="status-btn status-btn-purple" title="{{ _('View Comments') }}">
+                    <svg fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="status-btn-text">{{ _("Comments") }}</span>
+                </button>
+                <button id="status-native-fullscreen-btn" type="button" class="status-btn status-btn-green" title="{{ _('Native Fullscreen') }}">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="square">
+                            <path d="M20 35 L20 20 L35 20"/><path d="M80 35 L80 20 L65 20"/>
+                            <path d="M20 65 L20 80 L35 80"/><path d="M80 65 L80 80 L65 80"/>
+                        </g>
+                    </svg>
+                    <span class="status-btn-text">{{ _("Fullscreen") }}</span>
+                </button>
+                <button id="status-pseudo-fullscreen-btn" type="button" class="status-btn status-btn-blue" title="{{ _('Pseudo Fullscreen') }}">
+                    <svg viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="5" y="5" width="60" height="60" fill="none" stroke="currentColor" stroke-width="6" rx="3"/>
+                        <g fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="square">
+                            <path d="M15 25 L15 15 L25 15"/><path d="M55 25 L55 15 L45 15"/>
+                            <path d="M15 45 L15 55 L25 55"/><path d="M55 45 L55 55 L45 55"/>
+                        </g>
+                    </svg>
+                    <span class="status-btn-text">{{ _("Expand") }}</span>
+                </button>
+                <button id="game-refresh-btn" type="button" onclick="refreshGame()" class="status-btn status-btn-orange" title="{{ _('Refresh Game') }}">
+                    <svg viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="status-btn-text">{{ _("Refresh") }}</span>
+                </button>
+            </div>
+        </div>
+
+        {# 游戏推荐 #}
+        <section class="section" aria-labelledby="recommendations-title">
+            <div class="container">
+                <h2 id="recommendations-title" class="section-title">{{ _("sprunki phase 4 mod") }}</h2>
+                <div class="games-grid">
+                    {% for game in datas_list %}
+                        {% set game = {'url': game.url, 'image': game.image, 'title': game.title} %}
+                        {% include "components/game-card.html" %}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        {# 评论系统 #}
+        <section id="comments-section" class="section comments-section">
+            <div class="container">
+                <div class="comments-header">
+                    <h2 class="section-title">{{ _("Player Reviews") }}</h2>
+                    <div class="comments-stats">
+                        <span id="total-comments">0 {{ _("comments") }}</span>
+                        <span class="comments-stats-divider">•</span>
+                        <span id="average-rating">0.0 ★</span>
+                    </div>
+                </div>
+
+                {# 评论表单 #}
+                <div class="comment-form">
+                    <div class="comment-form-avatar">U</div>
+                    <div class="comment-form-content">
+                        <div class="comment-rating">
+                            <label class="comment-rating-label">{{ _("Your Rating") }}</label>
+                            <div class="rating-stars">
+                                <span class="rating-star" data-rating="1">★</span>
+                                <span class="rating-star" data-rating="2">★</span>
+                                <span class="rating-star" data-rating="3">★</span>
+                                <span class="rating-star" data-rating="4">★</span>
+                                <span class="rating-star" data-rating="5">★</span>
+                            </div>
+                        </div>
+                        <div class="comment-textarea-wrapper">
+                            <textarea id="comment-input" class="comment-textarea" placeholder="{{ _('Share your thoughts about this game...') }}" rows="3"></textarea>
+                            <button type="button" id="emoji-btn" class="emoji-btn" title="Insert emoji">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                                </svg>
+                            </button>
+                            <div id="emoji-panel" class="emoji-panel hidden"></div>
+                        </div>
+                        <div class="comment-inputs">
+                            <input type="text" id="username-input" class="comment-input" placeholder="{{ _('Your name (optional)') }}">
+                            <input type="email" id="email-input" class="comment-input" placeholder="{{ _('Your email (optional)') }}">
+                        </div>
+                        <button onclick="submitComment()" class="btn btn-primary">
+                            <span id="submit-text">{{ _("Post Comment") }}</span>
+                            <div id="submit-loading" class="loading-spinner hidden"></div>
+                        </button>
+                    </div>
+                </div>
+
+                {# 评论列表 #}
+                <div id="comments-list">
+                    <div id="loading-comments" class="comments-skeleton">
+                        {# 骨架屏 - 模拟3条评论 #}
+                        {% for i in range(3) %}
+                        <div class="skeleton-comment">
+                            <div class="skeleton-avatar"></div>
+                            <div class="skeleton-content">
+                                <div class="skeleton-header">
+                                    <div class="skeleton-name"></div>
+                                    <div class="skeleton-date"></div>
+                                </div>
+                                <div class="skeleton-text"></div>
+                                <div class="skeleton-text short"></div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {# 加载更多 #}
+                <div id="load-more-section" class="text-center hidden">
+                    <button onclick="loadMoreComments()" class="btn btn-secondary" id="load-more-btn">
+                        {{ _("Load More Comments") }}
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        {# 关于游戏 #}
+        <section class="section about-section">
+            <div class="container">
+                <h2 class="section-title">{{ _("Get Ready for sprunki phase 4") }}</h2>
+                <div class="about-content glass-card">
+                    <p class="about-text">{{ _("Yo! Let me tell you about sprunki phase 4 - this mind-blowing fan mod that's completely revolutionized Incredibox. sprunki phase 4 brings sick beats and contemporary flavors that you won't find anywhere else. As the latest addition to the lineup, sprunki phase 4 has been crushing it in the Incredibox scene, bringing together veteran players and fresh faces alike.") }}</p>
+
+                    <h3 class="about-subtitle">{{ _("Why sprunki phase 4 is Absolutely Fire:") }}</h3>
+
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <h4 class="feature-title">{{ _("Next-Level Visuals in sprunki phase 4") }}</h4>
+                            <ul class="feature-list">
+                                <li>{{ _("One-of-a-kind character designs that'll blow your mind") }}</li>
+                                <li>{{ _("Butter-smooth animations that hit different") }}</li>
+                                <li>{{ _("Sleek, contemporary aesthetic that's pure eye candy") }}</li>
+                                <li>{{ _("Drop-dead gorgeous color palettes that pop off") }}</li>
+                            </ul>
+                        </div>
+
+                        <div class="feature-card">
+                            <h4 class="feature-title">{{ _("sprunki phase 4's Insane Audio Experience") }}</h4>
+                            <ul class="feature-list">
+                                <li>{{ _("Fresh beats and sounds that'll get you hooked") }}</li>
+                                <li>{{ _("Genre-bending vibes to fuel your creativity") }}</li>
+                                <li>{{ _("Epic mixing tools for that professional touch") }}</li>
+                                <li>{{ _("Crystal-clear sound quality that slaps") }}</li>
+                            </ul>
+                        </div>
+
+                        <div class="feature-card">
+                            <h4 class="feature-title">{{ _("User-Friendly Goodness of sprunki phase 4") }}</h4>
+                            <ul class="feature-list">
+                                <li>{{ _("Controls that feel like second nature") }}</li>
+                                <li>{{ _("Zero learning curve - just jump right in") }}</li>
+                                <li>{{ _("Everything's right where you need it") }}</li>
+                                <li>{{ _("Real-time feedback that keeps you in the zone") }}</li>
+                            </ul>
+                        </div>
+
+                        <div class="feature-card">
+                            <h4 class="feature-title">{{ _("sprunki phase 4's Unlimited Creative Potential") }}</h4>
+                            <ul class="feature-list">
+                                <li>{{ _("Let your imagination run wild with endless possibilities") }}</li>
+                                <li>{{ _("Stack sounds like a boss") }}</li>
+                                <li>{{ _("Craft any vibe that speaks to you") }}</li>
+                                <li>{{ _("Put your own unique spin on everything") }}</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p class="about-text">{{ _("What's absolutely wild about sprunki phase 4 is how it keeps everything we love about Incredibox while cranking the creativity factor up to eleven. Whether you're an OG or just diving into sprunki phase 4, you'll find yourself completely absorbed in this musical playground.") }}</p>
+                    <p class="about-text">{{ _("For real, this upgrade is a testament to how talented our community is - sprunki phase 4 shows that passionate fans can take something dope and make it even dopier while staying true to what made the original so special.") }}</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    {# 浮动返回游戏按钮 #}
+    <button id="backToGameBtn" class="back-to-game-btn" onclick="scrollToGame()">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
+        </svg>
+        <span>{{ _("Back to Game") }}</span>
+    </button>
+
+    {# 页脚 #}
+    {% include "components/footer.html" %}
+
+    {# 回复表单模板 #}
+    <template id="reply-form-template">
+        <div class="reply-form">
+            <h4 class="reply-form-title">Reply to @<span class="reply-to-username"></span></h4>
+            <input type="text" class="reply-username comment-input" placeholder="Your name (optional)">
+            <textarea class="reply-content comment-textarea" placeholder="Enter your reply..." rows="3" required></textarea>
+            <div class="reply-form-actions">
+                <button type="button" class="submit-reply-btn btn btn-primary btn-sm">Submit</button>
+                <button type="button" class="cancel-reply-btn btn btn-secondary btn-sm">Cancel</button>
+            </div>
+        </div>
+    </template>
+
+    {# Google Analytics #}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZV62Y6WE6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-NZV62Y6WE6');
+    </script>
+
+    {# 核心 JavaScript #}
+    <script src="{{ url_for('static', filename='dist/app.js') }}"></script>
+
+    <script>
+        // 导航和语言选择器
+        document.addEventListener('DOMContentLoaded', function() {
+            // 导航菜单
+            const navToggle = document.querySelector('.nav-toggle');
+            const mobileNav = document.getElementById('mobile-nav');
+
+            if (navToggle && mobileNav) {
+                navToggle.addEventListener('click', function() {
+                    mobileNav.classList.toggle('show');
+                    navToggle.classList.toggle('active');
+                });
+            }
+
+            // 语言选择器
+            const langBtn = document.getElementById('language-btn');
+            const langDropdown = document.getElementById('language-dropdown');
+            const mobileLangDrawer = document.getElementById('mobile-language-drawer');
+            const closeLangDrawer = document.getElementById('close-lang-drawer');
+
+            if (langBtn) {
+                langBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (window.innerWidth < 768) {
+                        mobileLangDrawer?.classList.add('show');
+                    } else {
+                        langDropdown?.classList.toggle('show');
+                    }
+                });
+            }
+
+            closeLangDrawer?.addEventListener('click', () => {
+                mobileLangDrawer?.classList.remove('show');
+            });
+
+            // 点击外部关闭
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.language-wrapper')) {
+                    langDropdown?.classList.remove('show');
+                }
+                if (!e.target.closest('#mobile-nav') && !e.target.closest('.nav-toggle')) {
+                    mobileNav?.classList.remove('show');
+                    navToggle?.classList.remove('active');
+                }
+            });
+        });
+
+        // 滚动到评论
+        function scrollToComments() {
+            document.getElementById('comments-section')?.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 滚动到游戏
+        function scrollToGame() {
+            document.getElementById('game_section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // 浮动按钮显示控制
+        function toggleBackToGameButton() {
+            const btn = document.getElementById('backToGameBtn');
+            const gameSection = document.getElementById('game_section');
+            if (!btn || !gameSection) return;
+
+            const gameRect = gameSection.getBoundingClientRect();
+            btn.classList.toggle('show', gameRect.bottom < 0);
+        }
+
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            if (scrollTimeout) clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(toggleBackToGameButton, 10);
+        });
+
+        // 游戏启动函数
+        function playGameSafe() {
+            console.log('playGameSafe() called');
+            if (typeof window.playGame === 'function') {
+                window.playGame();
+            } else {
+                const gameIntro = document.getElementById('game_intro');
+                const gameIframe = document.getElementById('game_iframe');
+                if (gameIntro && gameIframe) {
+                    gameIntro.classList.add('hidden');
+                    gameIframe.classList.remove('hidden');
+                }
+            }
+        }
+
+        // 游戏刷新
+        function refreshGame() {
+            const gameIframe = document.getElementById('game_iframe');
+            if (gameIframe) {
+                const src = gameIframe.src;
+                gameIframe.src = '';
+                setTimeout(() => gameIframe.src = src, 100);
+            }
+        }
+
+        // 全局函数暴露
+        window.playGameWithAudio = playGameSafe;
+        window.startGame = playGameSafe;
+
+        // iframe 消息监听
+        window.addEventListener('message', function(event) {
+            if (event.data?.type === 'PLAY_GAME_REQUEST' || event.data === 'playGameWithAudio') {
+                playGameSafe();
+            }
+        });
+    </script>
+
+    {# 延迟加载脚本 #}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 延迟加载评论系统
+            setTimeout(function() {
+                var commentsCss = document.createElement('link');
+                commentsCss.rel = 'stylesheet';
+                commentsCss.href = '{{ url_for("static", filename="css/comments.css") }}';
+                document.head.appendChild(commentsCss);
+
+                var commentsJs = document.createElement('script');
+                commentsJs.src = '{{ url_for("static", filename="js/min/comments.min.js") }}';
+                commentsJs.onload = function() {
+                    if (typeof initializeCommentSystem === 'function') {
+                        initializeCommentSystem();
+                    }
+                };
+                document.body.appendChild(commentsJs);
+
+                var emojiJs = document.createElement('script');
+                emojiJs.src = '{{ url_for("static", filename="js/min/emoji-picker.min.js") }}';
+                document.body.appendChild(emojiJs);
+            }, 1000);
+
+            // 延迟加载全屏脚本
+            setTimeout(function() {
+                var fullscreenJs = document.createElement('script');
+                fullscreenJs.src = "{{ url_for('static', filename='style/min/fullscreen.min.js') }}";
+                fullscreenJs.onload = function() {
+                    var nativeFullscreenJs = document.createElement('script');
+                    nativeFullscreenJs.src = "{{ url_for('static', filename='style/min/native-fullscreen.min.js') }}";
+                    nativeFullscreenJs.onload = function() {
+                        setTimeout(function() {
+                            var gameStatusBarJs = document.createElement('script');
+                            gameStatusBarJs.src = "{{ url_for('static', filename='js/min/game-status-bar.min.js') }}";
+                            document.body.appendChild(gameStatusBarJs);
+                        }, 200);
+                    };
+                    document.body.appendChild(nativeFullscreenJs);
+                };
+                document.body.appendChild(fullscreenJs);
+
+                var scriptJs = document.createElement('script');
+                scriptJs.src = "{{ url_for('static', filename='style/min/script.min.js') }}";
+                document.body.appendChild(scriptJs);
+            }, 500);
+        });
+    </script>
+
+    {# PWA 安装引导提示 #}
+    <div id="pwa-install-prompt" class="pwa-install-prompt hidden">
+        <div class="pwa-install-content">
+            <div class="pwa-install-icon">
+                <img src="https://img.sprunki.net/image/sprunki-phase-4.webp" alt="Sprunki Phase 4" width="48" height="48">
+            </div>
+            <div class="pwa-install-text">
+                <div class="pwa-install-title">{{ _("Install Sprunki Phase 4") }}</div>
+                <div class="pwa-install-desc">{{ _("Add to home screen for better experience") }}</div>
+            </div>
+            <button id="pwa-install-btn" class="pwa-install-btn">{{ _("Install") }}</button>
+            <button id="pwa-dismiss-btn" class="pwa-dismiss-btn" aria-label="Close">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <style>
+        .pwa-install-prompt {
+            position: fixed;
+            bottom: 1rem;
+            left: 1rem;
+            right: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+            z-index: 9999;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .pwa-install-prompt.hidden {
+            display: none;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .pwa-install-content {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-xl);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .pwa-install-icon {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .pwa-install-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .pwa-install-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .pwa-install-title {
+            font-weight: 600;
+            font-size: 0.9375rem;
+            color: var(--color-text-primary);
+        }
+
+        .pwa-install-desc {
+            font-size: 0.8125rem;
+            color: var(--color-text-secondary);
+            margin-top: 0.125rem;
+        }
+
+        .pwa-install-btn {
+            flex-shrink: 0;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-700));
+            color: white;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+
+        .pwa-install-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.4);
+        }
+
+        .pwa-dismiss-btn {
+            flex-shrink: 0;
+            padding: 0.375rem;
+            background: transparent;
+            border: none;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+        }
+
+        .pwa-dismiss-btn:hover {
+            background: var(--color-bg-elevated);
+            color: var(--color-text-primary);
+        }
+
+        @media (max-width: 480px) {
+            .pwa-install-prompt {
+                left: 0.5rem;
+                right: 0.5rem;
+                bottom: 0.5rem;
+            }
+
+            .pwa-install-content {
+                padding: 0.75rem;
+            }
+
+            .pwa-install-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .pwa-install-title {
+                font-size: 0.875rem;
+            }
+
+            .pwa-install-desc {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+
+    {# PWA Service Worker #}
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('{{ url_for("static", filename="pwa-sw.js") }}')
+                    .then(function(registration) {
+                        console.log('PWA: Service Worker registered');
+                    })
+                    .catch(function(error) {
+                        console.error('PWA: Service Worker registration failed:', error);
+                    });
+            });
+        }
+
+        // PWA 安装引导
+        (function() {
+            let deferredPrompt;
+            const installPrompt = document.getElementById('pwa-install-prompt');
+            const installBtn = document.getElementById('pwa-install-btn');
+            const dismissBtn = document.getElementById('pwa-dismiss-btn');
+            const DISMISSED_KEY = 'pwa-install-dismissed';
+            const DISMISS_DURATION = 7 * 24 * 60 * 60 * 1000; // 7天
+
+            // 检查是否已经安装或已关闭
+            function shouldShowPrompt() {
+                // 已安装为 PWA
+                if (window.matchMedia('(display-mode: standalone)').matches) return false;
+                if (window.navigator.standalone === true) return false;
+
+                // 用户已关闭且未过期
+                const dismissed = localStorage.getItem(DISMISSED_KEY);
+                if (dismissed && Date.now() - parseInt(dismissed) < DISMISS_DURATION) return false;
+
+                return true;
+            }
+
+            // 监听安装事件
+            window.addEventListener('beforeinstallprompt', function(e) {
+                e.preventDefault();
+                deferredPrompt = e;
+
+                if (shouldShowPrompt()) {
+                    setTimeout(function() {
+                        installPrompt.classList.remove('hidden');
+                    }, 3000);
+                }
+            });
+
+            // 安装按钮点击
+            if (installBtn) {
+                installBtn.addEventListener('click', async function() {
+                    if (!deferredPrompt) return;
+
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+
+                    if (outcome === 'accepted') {
+                        console.log('PWA: User accepted install');
+                    }
+
+                    deferredPrompt = null;
+                    installPrompt.classList.add('hidden');
+                });
+            }
+
+            // 关闭按钮
+            if (dismissBtn) {
+                dismissBtn.addEventListener('click', function() {
+                    localStorage.setItem(DISMISSED_KEY, Date.now().toString());
+                    installPrompt.classList.add('hidden');
+                });
+            }
+
+            // iOS 特殊处理 - 显示手动添加提示
+            if (/iPhone|iPad|iPod/.test(navigator.userAgent) && !window.navigator.standalone) {
+                if (shouldShowPrompt()) {
+                    setTimeout(function() {
+                        const desc = document.querySelector('.pwa-install-desc');
+                        if (desc) {
+                            desc.textContent = '{{ _("Tap Share → Add to Home Screen") }}';
+                        }
+                        if (installBtn) {
+                            installBtn.textContent = '{{ _("How to") }}';
+                            installBtn.onclick = function() {
+                                alert('{{ _("1. Tap the Share button at the bottom\\n2. Scroll down and tap Add to Home Screen\\n3. Tap Add to confirm") }}');
+                            };
+                        }
+                        installPrompt.classList.remove('hidden');
+                    }, 5000);
+                }
+            }
+        })();
+    </script>
+
+    {# 延迟加载 Google Ads 和 Analytics (用户交互后加载) #}
+    <script>
+    (function() {
+        var adsLoaded = false;
+        function loadAdsAndAnalytics() {
+            if (adsLoaded) return;
+            adsLoaded = true;
+
+            // Google Ads
+            var adsScript = document.createElement('script');
+            adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8336151654459672';
+            adsScript.async = true;
+            adsScript.crossOrigin = 'anonymous';
+            document.body.appendChild(adsScript);
+
+            // Google Analytics
+            var gaScript = document.createElement('script');
+            gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-NZV62Y6WE6';
+            gaScript.async = true;
+            gaScript.onload = function() {
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                window.gtag = gtag;
+                gtag('js', new Date());
+                gtag('config', 'G-NZV62Y6WE6');
+            };
+            document.body.appendChild(gaScript);
+        }
+
+        // 用户交互时加载，或3秒后自动加载
+        ['scroll', 'click', 'touchstart', 'mousemove'].forEach(function(evt) {
+            window.addEventListener(evt, loadAdsAndAnalytics, {once: true, passive: true});
+        });
+        setTimeout(loadAdsAndAnalytics, 3000);
+    })();
+    </script>
+</body>
+</html>

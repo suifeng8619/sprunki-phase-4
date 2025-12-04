@@ -1,0 +1,39 @@
+# Sprunki Phase 4
+
+> Sprunki Phase 4 is the latest update in the music rhythm game, offering new beats, characters, and challenges.
+
+Sprunki Phase 4 delivers a refreshed music rhythm experience with brand new beats, animated characters, enhanced visuals, and increased challenge levels. Available to play directly in-browser across multiple languages.
+
+## Core Content
+- [Homepage](https://sprunkiphase4.net/): Discover the Sprunki Phase series and play the latest Phase 4 update.
+- [Sprunki Phase 1](https://sprunkiphase4.net/sprunki-phase-1.html): The original launch of the Sprunki series, setting the foundation for the rhythmic universe.
+- [Sprunki Phase 2](https://sprunkiphase4.net/sprunki-phase-2.html): Expanded beats and added gameplay complexity, building on Phase 1's success.
+- [Sprunki Phase 3](https://sprunkiphase4.net/sprunki-phase-3.html): Introducing new characters and upgraded beat mechanics.
+- [Sprunki Phase 4](https://sprunkiphase4.net/sprunki-phase-4.html): The latest version featuring advanced rhythms, characters, and dynamic gameplay.
+- [Sprunki Phase 5](https://sprunkiphase4.net/sprunki-phase-5.html): Continuing the evolution with innovative challenges and musical diversity.
+
+## Related Projects
+- [Sprunki Swapped](https://sprunkiphase4.net/sprunki-swapped.html): A creative remix of original Sprunki beats.
+- [Sprunki Modded](https://sprunkiphase4.net/sprunki-modded.html): Explore community-made modifications adding new flavors to Sprunki gameplay.
+- [Sprunki Night Time](https://sprunkiphase4.net/sprunki-night-time.html): A special themed version of Sprunki with darker, ambient beats.
+- [Sprunked Incredibox](https://sprunkiphase4.net/sprunked-incredibox.html): A crossover project blending Sprunki and Incredibox gameplay elements.
+
+## Useful Resources
+- [中文版首页](https://sprunkiphase4.net/zh): Access Sprunki Phase 4 in Chinese.
+- [Español](https://sprunkiphase4.net/es): Explore the game in Spanish.
+- [Français](https://sprunkiphase4.net/fr): Play Sprunki Phase 4 in French.
+- [Deutsch](https://sprunkiphase4.net/de): German version of Sprunki Phase 4.
+- [Русский](https://sprunkiphase4.net/ru): Russian version of Sprunki Phase 4.
+- [日本語](https://sprunkiphase4.net/ja): Japanese version of Sprunki Phase 4.
+
+## Features
+- Browser-based music rhythm game
+- Free to play, no downloads required
+- Updated phases with new content regularly
+- Multilingual support: EN, ZH, ES, FR, DE, RU, JA, and more
+
+## Audience
+- Targeted at global rhythm game players
+- Suitable for casual and competitive players
+- Recommended for ages 7+
+

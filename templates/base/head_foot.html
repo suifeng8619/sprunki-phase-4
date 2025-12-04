@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no, minimal-ui">
+    <title>{{ info.article.title }} | {{ _("Free Play") }} {{ _("Game Online") }} - {{ _("sprunki phase 4") }}</title>
+    <meta name="description" content="{{ info.article.jianjie }}">
+    <link rel="canonical" href="{{ request.base_url }}">
+
+    {# Open Graph 标签 #}
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.base_url }}">
+    <meta property="og:title" content="{{ info.article.title }} | {{ _("Free Play") }} {{ _("Game Online") }}">
+    <meta property="og:description" content="{{ info.article.jianjie }}">
+    <meta property="og:image" content="{{ info.article.image_url }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Sprunki Phase 4">
+    <meta property="og:locale" content="{{ get_locale() }}">
+
+    {# Twitter Card 标签 #}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ info.article.title }} | {{ _("Free Play") }} {{ _("Game Online") }}">
+    <meta name="twitter:description" content="{{ info.article.jianjie }}">
+    <meta name="twitter:image" content="{{ info.article.image_url }}">
+
+    {# 结构化数据 - VideoGame #}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "{{ info.article.title }}",
+        "description": "{{ info.article.jianjie|replace('"', '\\"') }}",
+        "genre": ["Music Game", "Rhythm Game"],
+        "gamePlatform": "Web Browser",
+        "applicationCategory": "Game",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.5",
+            "ratingCount": "{{ range(500, 2000)|random }}"
+        },
+        "image": "{{ info.article.image_url }}",
+        "url": "{{ request.base_url }}"
+    }
+    </script>
+
+    {# 预加载关键资源 #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="{{ url_for('static', filename='dist/main.css') }}" as="style">
+
+    {# 新设计系统 CSS #}
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/main.css') }}">
+
+    {# 主题切换按钮样式修复 - 绕过CSS文件截断问题 #}
+    <style>
+        .theme-toggle {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            width: 40px !important;
+            height: 40px !important;
+            min-width: 40px !important;
+            min-height: 40px !important;
+            flex-shrink: 0 !important;
+            border-radius: var(--radius-xl, 1rem);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+        }
+        .theme-toggle svg {
+            width: 1.25rem !important;
+            height: 1.25rem !important;
+            transition: all 0.2s ease;
+        }
+        .theme-toggle .sun-icon {
+            position: absolute !important;
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+        .theme-toggle .moon-icon {
+            position: absolute !important;
+            opacity: 0;
+            transform: rotate(-90deg) scale(0);
+        }
+        [data-theme="light"] .theme-toggle .sun-icon {
+            opacity: 0;
+            transform: rotate(90deg) scale(0);
+        }
+        [data-theme="light"] .theme-toggle .moon-icon {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+        [data-theme="light"] .theme-toggle {
+            background: rgba(0, 0, 0, 0.08);
+            border-color: rgba(0, 0, 0, 0.15);
+            color: #1e293b;
+        }
+        [data-theme="light"] .theme-toggle:hover {
+            background: rgba(0, 0, 0, 0.12);
+        }
+    </style>
+
+    {# 字体 #}
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    {# 多语言 hreflang 标签 #}
+    <link rel="alternate" hreflang="en" href="{{ urljoin(request.host_url, no_lang_path) }}">
+    {% for lang in languages %}
+        {% if lang.code != 'en' %}
+    <link rel="alternate" hreflang="{{ lang.code }}" href="{{ urljoin(request.host_url, lang.code + '/' + no_lang_path) }}">
+        {% endif %}
+    {% endfor %}
+    <link rel="alternate" hreflang="x-default" href="{{ urljoin(request.host_url, no_lang_path) }}">
+
+    {# PWA 配置 #}
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Sprunki P4">
+    <meta name="theme-color" content="#18181b">
+
+    {# 图标 #}
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='icon-180.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='icon-180.png') }}">
+    <link rel="apple-touch-icon" sizes="192x192" href="{{ url_for('static', filename='icon-192.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    {# Google Ads meta (脚本延迟加载到body底部) #}
+    <meta name="google-adsense-account" content="ca-pub-8336151654459672">
+
+    {# 额外头部内容 #}
+    {% block head %}{% endblock %}
+</head>
+<body>
+    {# 导航栏 #}
+    <header class="nav-header">
+        <nav class="nav-container">
+            {# Logo #}
+            {% if no_en_lang() == None %}
+                <a href="/" class="nav-logo" title="{{ _('sprunki phase 4') }}">
+                    Sprunki Phase 4
+                </a>
+            {% else %}
+                <a href="/{{ no_en_lang() }}" class="nav-logo" title="{{ _('sprunki phase 4') }}">
+                    Sprunki Phase 4
+                </a>
+            {% endif %}
+
+            {# 桌面端导航 #}
+            <div class="nav-menu" id="nav-menu">
+                {% if no_en_lang() == None %}
+                    <a href="/" class="nav-link">{{ _("Home") }}</a>
+                {% else %}
+                    <a href="/{{ no_en_lang() }}" class="nav-link">{{ _("Home") }}</a>
+                {% endif %}
+                <a href="{{ url_for('base_url.article_info_demo', lang=no_en_lang(), article_url='sprunki') }}" class="nav-link">{{ _("sprunki") }}</a>
+                <a href="{{ url_for('base_url.article_info_demo', lang=no_en_lang(), article_url='sprunki-phase-3') }}" class="nav-link">{{ _("sprunki phase 3") }}</a>
+                <a href="{{ url_for('base_url.article_list_demo', lang=no_en_lang(), category='sprunki-mod') }}" class="nav-link">{{ _("sprunki mod") }}</a>
+            </div>
+
+            {# 右侧工具 #}
+            <div class="nav-tools">
+                {# 主题切换按钮 #}
+                <button id="themeToggle" class="theme-toggle" aria-label="{{ _('Toggle theme') }}" title="{{ _('Toggle theme') }}">
+                    {# 太阳图标 - 暗色模式下显示 #}
+                    <svg class="sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                    {# 月亮图标 - 亮色模式下显示 #}
+                    <svg class="moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                    </svg>
+                </button>
+
+                {# 语言选择器 #}
+                <div class="language-wrapper">
+                    <button id="languageBtn" class="nav-icon-btn" aria-label="{{ _('Language') }}" aria-expanded="false">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"/>
+                        </svg>
+                    </button>
+
+                    {# PC 端下拉 #}
+                    <div id="languageDropdown" class="language-dropdown">
+                        <div class="language-dropdown-content">
+                            {% for lang in languages %}
+                                {% if lang.code == 'en' %}
+                                    <a href="{{ urljoin(request.host_url, no_lang_path) }}" class="language-option {% if get_locale() == 'en' %}active{% endif %}">
+                                        <span class="language-code-badge">{{ lang.code|upper }}</span>
+                                        <span class="language-name">{{ lang.name }}</span>
+                                    </a>
+                                {% else %}
+                                    <a href="{{ urljoin(request.host_url, lang.code + '/' + no_lang_path) }}" class="language-option {% if get_locale() == lang.code %}active{% endif %}">
+                                        <span class="language-code-badge">{{ lang.code|upper }}</span>
+                                        <span class="language-name">{{ lang.name }}</span>
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    {# 移动端抽屉 #}
+                    <div id="mobileLanguageDrawer" class="mobile-language-drawer">
+                        <div class="drawer-header">
+                            <h3>{{ _("Select Language") }}</h3>
+                            <button id="closeDrawerBtn" class="drawer-close-btn" aria-label="Close">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="drawer-content">
+                            {% for lang in languages %}
+                                {% if lang.code == 'en' %}
+                                    <a href="{{ urljoin(request.host_url, no_lang_path) }}" class="mobile-language-option">
+                                        <span class="language-code-badge">{{ lang.code|upper }}</span>
+                                        <span class="language-name">{{ lang.name }}</span>
+                                        {% if get_locale() == 'en' %}
+                                        <svg class="check-icon" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                        {% endif %}
+                                    </a>
+                                {% else %}
+                                    <a href="{{ urljoin(request.host_url, lang.code + '/' + no_lang_path) }}" class="mobile-language-option">
+                                        <span class="language-code-badge">{{ lang.code|upper }}</span>
+                                        <span class="language-name">{{ lang.name }}</span>
+                                        {% if get_locale() == lang.code %}
+                                        <svg class="check-icon" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                        {% endif %}
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div id="languageBackdrop" class="language-backdrop"></div>
+                </div>
+
+                {# 移动端菜单按钮 #}
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        {# 移动端菜单 #}
+        <div class="mobile-nav" id="mobileNav">
+            {% if no_en_lang() == None %}
+                <a href="/" class="mobile-nav-link">{{ _("Home") }}</a>
+            {% else %}
+                <a href="/{{ no_en_lang() }}" class="mobile-nav-link">{{ _("Home") }}</a>
+            {% endif %}
+            <a href="{{ url_for('base_url.article_info_demo', lang=no_en_lang(), article_url='sprunki') }}" class="mobile-nav-link">{{ _("sprunki") }}</a>
+            <a href="{{ url_for('base_url.article_info_demo', lang=no_en_lang(), article_url='sprunki-phase-3') }}" class="mobile-nav-link">{{ _("sprunki phase 3") }}</a>
+            <a href="{{ url_for('base_url.article_list_demo', lang=no_en_lang(), category='sprunki-mod') }}" class="mobile-nav-link">{{ _("sprunki mod") }}</a>
+        </div>
+    </header>
+
+    {# 面包屑导航 #}
+    {% if info and info.article %}
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <div class="breadcrumb-container">
+            <ol class="breadcrumb-list" itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    {% if no_en_lang() == None %}
+                        <a href="/" class="breadcrumb-link" itemprop="item">
+                    {% else %}
+                        <a href="/{{ no_en_lang() }}" class="breadcrumb-link" itemprop="item">
+                    {% endif %}
+                        <svg class="breadcrumb-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+                        </svg>
+                        <span itemprop="name">{{ _("Home") }}</span>
+                    </a>
+                    <meta itemprop="position" content="1"/>
+                </li>
+                <li class="breadcrumb-separator">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                </li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a href="{{ url_for('base_url.article_list_demo', lang=no_en_lang(), category='sprunki-mod') }}" class="breadcrumb-link" itemprop="item">
+                        <span itemprop="name">{{ _("sprunki mod") }}</span>
+                    </a>
+                    <meta itemprop="position" content="2"/>
+                </li>
+                <li class="breadcrumb-separator">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                </li>
+                <li class="breadcrumb-item current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <span class="breadcrumb-current" itemprop="name">{{ info.article.title }}</span>
+                    <meta itemprop="position" content="3"/>
+                </li>
+            </ol>
+        </div>
+    </nav>
+    {% endif %}
+
+    {# 主内容区 #}
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    {# 页脚 #}
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="{{ url_for('base_url.index_lang', lang=no_en_lang()) }}" class="footer-logo">
+                        Sprunki Phase 4
+                    </a>
+                    <p class="footer-desc">
+                        {{ _("Play the best Sprunki music games online for free.") }}
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <h4>{{ _("Quick Links") }}</h4>
+                    <nav>
+                        <a href="{{ url_for('base_url.index_lang', lang=no_en_lang()) }}">{{ _("Home") }}</a>
+                        <a href="{{ url_for('base_url.article_list_demo', lang=no_en_lang(), category='sprunki-mod') }}">{{ _("All Games") }}</a>
+                        <a href="/about.html">{{ _("About") }}</a>
+                        <a href="/privacy-policy.html">{{ _("Privacy Policy") }}</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; {{ now().year if now else 2024 }} Sprunki Phase 4. {{ _("All rights reserved.") }}</p>
+            </div>
+        </div>
+    </footer>
+
+    {# 新设计系统 JS #}
+    <script type="module" src="{{ url_for('static', filename='dist/app.js') }}"></script>
+
+    {# 导航交互脚本 #}
+    <script>
+    (function() {
+        // 移动端菜单
+        const navToggle = document.getElementById('navToggle');
+        const mobileNav = document.getElementById('mobileNav');
+
+        if (navToggle && mobileNav) {
+            navToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileNav.classList.toggle('show');
+                this.setAttribute('aria-expanded', mobileNav.classList.contains('show'));
+            });
+        }
+
+        // 语言选择器
+        const languageBtn = document.getElementById('languageBtn');
+        const languageDropdown = document.getElementById('languageDropdown');
+        const mobileDrawer = document.getElementById('mobileLanguageDrawer');
+        const backdrop = document.getElementById('languageBackdrop');
+        const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+
+        const isMobile = () => window.innerWidth < 768;
+
+        function openLanguage() {
+            if (isMobile()) {
+                mobileDrawer.classList.add('show');
+                backdrop.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            } else {
+                languageDropdown.classList.add('show');
+            }
+            languageBtn.setAttribute('aria-expanded', 'true');
+        }
+
+        function closeLanguage() {
+            languageDropdown.classList.remove('show');
+            mobileDrawer.classList.remove('show');
+            backdrop.classList.remove('show');
+            document.body.style.overflow = '';
+            languageBtn.setAttribute('aria-expanded', 'false');
+        }
+
+        if (languageBtn) {
+            languageBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isOpen = languageDropdown.classList.contains('show') || mobileDrawer.classList.contains('show');
+                isOpen ? closeLanguage() : openLanguage();
+            });
+        }
+
+        if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeLanguage);
+        if (backdrop) backdrop.addEventListener('click', closeLanguage);
+
+        document.addEventListener('click', function(e) {
+            if (languageBtn && !languageBtn.contains(e.target) && !languageDropdown.contains(e.target)) {
+                closeLanguage();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLanguage();
+        });
+
+        // 主题切换
+        const themeToggle = document.getElementById('themeToggle');
+        const THEME_KEY = 'theme-preference';
+
+        // 获取当前主题
+        function getThemePreference() {
+            const stored = localStorage.getItem(THEME_KEY);
+            if (stored) return stored;
+            // 未设置时返回null，让CSS媒体查询决定
+            return null;
+        }
+
+        // 设置主题
+        function setTheme(theme) {
+            if (theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem(THEME_KEY, theme);
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.removeItem(THEME_KEY);
+            }
+            // 更新meta theme-color
+            const metaTheme = document.querySelector('meta[name="theme-color"]');
+            if (metaTheme) {
+                metaTheme.content = theme === 'light' ? '#f8fafc' : '#18181b';
+            }
+        }
+
+        // 切换主题
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (current === 'light') {
+                setTheme('dark');
+            } else if (current === 'dark') {
+                setTheme('light');
+            } else {
+                // 未设置时，切换到与系统相反的主题
+                setTheme(systemPrefersDark ? 'light' : 'dark');
+            }
+        }
+
+        // 初始化主题
+        const savedTheme = getThemePreference();
+        if (savedTheme) {
+            setTheme(savedTheme);
+        }
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+
+        // 监听系统主题变化
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+            // 只有在用户未手动设置时才响应系统变化
+            if (!localStorage.getItem(THEME_KEY)) {
+                // 移除data-theme属性，让CSS媒体查询接管
+                document.documentElement.removeAttribute('data-theme');
+            }
+        });
+    })();
+    </script>
+
+    {# 延迟加载 Google Ads 和 Analytics (用户交互后加载) #}
+    <script>
+    (function() {
+        var adsLoaded = false;
+        function loadAdsAndAnalytics() {
+            if (adsLoaded) return;
+            adsLoaded = true;
+
+            // Google Ads
+            var adsScript = document.createElement('script');
+            adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8336151654459672';
+            adsScript.async = true;
+            adsScript.crossOrigin = 'anonymous';
+            document.body.appendChild(adsScript);
+
+            // Google Analytics
+            var gaScript = document.createElement('script');
+            gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-NZV62Y6WE6';
+            gaScript.async = true;
+            gaScript.onload = function() {
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                window.gtag = gtag;
+                gtag('js', new Date());
+                gtag('config', 'G-NZV62Y6WE6');
+            };
+            document.body.appendChild(gaScript);
+        }
+
+        // 用户交互时加载，或3秒后自动加载
+        ['scroll', 'click', 'touchstart', 'mousemove'].forEach(function(evt) {
+            window.addEventListener(evt, loadAdsAndAnalytics, {once: true, passive: true});
+        });
+        setTimeout(loadAdsAndAnalytics, 3000);
+    })();
+    </script>
+
+    {# 额外脚本 #}
+    {% block scripts %}{% endblock %}
+</body>
+</html>

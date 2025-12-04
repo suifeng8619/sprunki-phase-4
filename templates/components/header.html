@@ -1,0 +1,264 @@
+{# 导航栏组件 #}
+<header class="nav-header">
+    <nav class="nav-container">
+        {# Logo #}
+        <a href="{{ url_for('base_url.index_lang', lang=no_en_lang()) }}" class="nav-logo">
+            Sprunki Phase 4
+        </a>
+
+        {# 桌面端导航菜单 #}
+        <div class="nav-menu" id="nav-menu">
+            <a href="{{ url_for('base_url.index_lang', lang=no_en_lang()) }}" class="nav-link">
+                {{ _("Home") }}
+            </a>
+            <a href="{{ url_for('base_url.article_list_demo', lang=no_en_lang(), category='all-games') }}" class="nav-link">
+                {{ _("Games") }}
+            </a>
+            <a href="{{ url_for('base_url.article_info_demo', lang=no_en_lang(), article_url='about-us') }}" class="nav-link">
+                {{ _("About") }}
+            </a>
+        </div>
+
+        {# 右侧工具栏 #}
+        <div class="flex items-center gap-2">
+            {# 主题切换按钮 #}
+            <button id="themeToggle" class="theme-toggle" aria-label="{{ _('Toggle theme') }}" title="{{ _('Toggle theme') }}">
+                <svg class="sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                </svg>
+                <svg class="moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                </svg>
+            </button>
+
+            {# 语言选择器 #}
+            {% include "components/language-selector.html" %}
+
+            {# 移动端菜单按钮 #}
+            <button class="nav-toggle md:hidden" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    {# 移动端导航菜单 #}
+    <div class="mobile-nav-menu hidden md:hidden" id="mobile-nav-menu">
+        <a href="{{ url_for('base_url.index_lang', lang=no_en_lang()) }}" class="mobile-nav-link">
+            {{ _("Home") }}
+        </a>
+        <a href="{{ url_for('base_url.article_list_demo', lang=no_en_lang(), category='all-games') }}" class="mobile-nav-link">
+            {{ _("Games") }}
+        </a>
+        <a href="{{ url_for('base_url.article_info_demo', lang=no_en_lang(), article_url='about-us') }}" class="mobile-nav-link">
+            {{ _("About") }}
+        </a>
+    </div>
+</header>
+
+<style>
+    /* 主题切换按钮 - 内联样式确保加载 */
+    .theme-toggle {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
+        flex-shrink: 0 !important;
+        border-radius: var(--radius-xl, 1rem);
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: white;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .theme-toggle:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.25);
+        transform: scale(1.05);
+    }
+
+    .theme-toggle svg {
+        width: 1.25rem !important;
+        height: 1.25rem !important;
+        transition: all 0.2s ease;
+    }
+
+    .theme-toggle .sun-icon {
+        position: absolute !important;
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+    }
+
+    .theme-toggle .moon-icon {
+        position: absolute !important;
+        opacity: 0;
+        transform: rotate(-90deg) scale(0);
+    }
+
+    /* 亮色模式下的图标状态 */
+    [data-theme="light"] .theme-toggle .sun-icon {
+        opacity: 0;
+        transform: rotate(90deg) scale(0);
+    }
+
+    [data-theme="light"] .theme-toggle .moon-icon {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+    }
+
+    [data-theme="light"] .theme-toggle {
+        background: rgba(0, 0, 0, 0.08);
+        border-color: rgba(0, 0, 0, 0.15);
+        color: #1e293b;
+    }
+
+    [data-theme="light"] .theme-toggle:hover {
+        background: rgba(0, 0, 0, 0.12);
+    }
+
+    /* 移动端菜单 */
+    .mobile-nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(39, 39, 42, 0.98);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--color-border-subtle);
+        padding: 1rem;
+        display: none;
+        flex-direction: column;
+        gap: 0.5rem;
+        z-index: 99;
+    }
+
+    .mobile-nav-menu.show {
+        display: flex;
+    }
+
+    .mobile-nav-link {
+        padding: 0.75rem 1rem;
+        border-radius: var(--radius-lg);
+        color: var(--color-text-primary);
+        text-decoration: none;
+        background: rgba(255, 255, 255, 0.05);
+        transition: all var(--transition-normal);
+    }
+
+    .mobile-nav-link:hover {
+        background: rgba(168, 85, 247, 0.15);
+        color: var(--color-primary-400);
+    }
+
+    .nav-toggle {
+        display: none;
+        padding: 0.5rem;
+        border-radius: var(--radius-lg);
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: white;
+        cursor: pointer;
+        transition: all var(--transition-normal);
+    }
+
+    .nav-toggle:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-toggle.active svg {
+        transform: rotate(90deg);
+    }
+
+    @media (max-width: 768px) {
+        .nav-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+</style>
+
+<script>
+    (function() {
+        const navToggle = document.getElementById('nav-toggle');
+        const mobileNavMenu = document.getElementById('mobile-nav-menu');
+
+        if (navToggle && mobileNavMenu) {
+            navToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileNavMenu.classList.toggle('show');
+                this.setAttribute('aria-expanded', mobileNavMenu.classList.contains('show'));
+            });
+
+            // 点击外部关闭
+            document.addEventListener('click', function(e) {
+                if (!navToggle.contains(e.target) && !mobileNavMenu.contains(e.target)) {
+                    navToggle.classList.remove('active');
+                    mobileNavMenu.classList.remove('show');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+
+        // 主题切换
+        const themeToggle = document.getElementById('themeToggle');
+        const THEME_KEY = 'theme-preference';
+
+        function getThemePreference() {
+            const stored = localStorage.getItem(THEME_KEY);
+            if (stored) return stored;
+            return null;
+        }
+
+        function setTheme(theme) {
+            if (theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem(THEME_KEY, theme);
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.removeItem(THEME_KEY);
+            }
+            const metaTheme = document.querySelector('meta[name="theme-color"]');
+            if (metaTheme) {
+                metaTheme.content = theme === 'light' ? '#f8fafc' : '#18181b';
+            }
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (current === 'light') {
+                setTheme('dark');
+            } else if (current === 'dark') {
+                setTheme('light');
+            } else {
+                setTheme(systemPrefersDark ? 'light' : 'dark');
+            }
+        }
+
+        const savedTheme = getThemePreference();
+        if (savedTheme) {
+            setTheme(savedTheme);
+        }
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+            if (!localStorage.getItem(THEME_KEY)) {
+                document.documentElement.removeAttribute('data-theme');
+            }
+        });
+    })();
+</script>
