@@ -16,11 +16,6 @@ from werkzeug.utils import secure_filename
 
 from setting import R2_ENDPOINT_URL, R2_ACCESS_KEY, R2_SECRET_KEY, R2_BUCKET_NAME
 
-# R2_ENDPOINT_URL = "https://819cc5c82aeb77dcbe9002c23c026748.r2.cloudflarestorage.com"
-# R2_BUCKET_NAME = 'ai-toolify'
-# R2_ACCESS_KEY = 'ba6a870f1cebf9218e64fd8b1714695c'
-# R2_SECRET_KEY = '9e9fc05b98938e744720bca777c1dd8bdbebf34ca4ed55a18c08ac1c7e6206d2'
-
 # 初始化 S3 客户端 - 只有在配置了R2时才初始化
 s3_client = None
 if R2_ENDPOINT_URL and R2_ACCESS_KEY and R2_SECRET_KEY:
